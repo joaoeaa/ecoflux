@@ -1,0 +1,50 @@
+[
+  {
+    "id": "empresa-001",
+    "nome": "Empresa XYZ S.A.",
+    "setor": "VAREJO",
+    "porte": "GRANDE",
+    "funcionarios": 850,
+    "modeloAtual": "FISICO_PVC",
+    "tiposBeneficio": ["VA", "VR"],
+    "dataContrato": "2024-01-15",
+    "historico": [
+      { "mes": "2025-06", "funcionariosMigrados": 780, "transacoesDigitais": 42500, "emissoesEvitadas_tCO2e": 10.22 },
+      { "mes": "2025-07", "funcionariosMigrados": 810, "transacoesDigitais": 45800, "emissoesEvitadas_tCO2e": 10.61 },
+      { "mes": "2025-08", "funcionariosMigrados": 820, "transacoesDigitais": 46200, "emissoesEvitadas_tCO2e": 10.74 },
+      { "mes": "2025-09", "funcionariosMigrados": 830, "transacoesDigitais": 47100, "emissoesEvitadas_tCO2e": 10.87 },
+      { "mes": "2025-10", "funcionariosMigrados": 835, "transacoesDigitais": 47800, "emissoesEvitadas_tCO2e": 10.94 },
+      { "mes": "2025-11", "funcionariosMigrados": 840, "transacoesDigitais": 48300, "emissoesEvitadas_tCO2e": 11.00 },
+      { "mes": "2025-12", "funcionariosMigrados": 843, "transacoesDigitais": 48700, "emissoesEvitadas_tCO2e": 11.04 },
+      { "mes": "2026-01", "funcionariosMigrados": 845, "transacoesDigitais": 49000, "emissoesEvitadas_tCO2e": 11.07 },
+      { "mes": "2026-02", "funcionariosMigrados": 847, "transacoesDigitais": 49200, "emissoesEvitadas_tCO2e": 11.10 },
+      { "mes": "2026-03", "funcionariosMigrados": 848, "transacoesDigitais": 49400, "emissoesEvitadas_tCO2e": 11.11 },
+      { "mes": "2026-04", "funcionariosMigrados": 849, "transacoesDigitais": 49600, "emissoesEvitadas_tCO2e": 11.12 },
+      { "mes": "2026-05", "funcionariosMigrados": 850, "transacoesDigitais": 49800, "emissoesEvitadas_tCO2e": 11.14 }
+    ]
+  },
+  {
+    "id": "empresa-002",
+    "nome": "Empresa ABC Ltda.",
+    "setor": "SERVICOS",
+    "porte": "MEDIO",
+    "funcionarios": 320,
+    "modeloAtual": "VALE_PAPEL",
+    "tiposBeneficio": ["VR"],
+    "dataContrato": "2024-06-01",
+    "historico": [
+      { "mes": "2025-06", "funcionariosMigrados": 290, "transacoesDigitais": 15800, "emissoesEvitadas_tCO2e": 3.80 },
+      { "mes": "2025-07", "funcionariosMigrados": 298, "transacoesDigitais": 16200, "emissoesEvitadas_tCO2e": 3.90 },
+      { "mes": "2025-08", "funcionariosMigrados": 302, "transacoesDigitais": 16500, "emissoesEvitadas_tCO2e": 3.96 },
+      { "mes": "2025-09", "funcionariosMigrados": 305, "transacoesDigitais": 16700, "emissoesEvitadas_tCO2e": 3.99 },
+      { "mes": "2025-10", "funcionariosMigrados": 308, "transacoesDigitais": 16900, "emissoesEvitadas_tCO2e": 4.03 },
+      { "mes": "2025-11", "funcionariosMigrados": 310, "transacoesDigitais": 17100, "emissoesEvitadas_tCO2e": 4.06 },
+      { "mes": "2025-12", "funcionariosMigrados": 312, "transacoesDigitais": 17300, "emissoesEvitadas_tCO2e": 4.09 },
+      { "mes": "2026-01", "funcionariosMigrados": 314, "transacoesDigitais": 17500, "emissoesEvitadas_tCO2e": 4.11 },
+      { "mes": "2026-02", "funcionariosMigrados": 315, "transacoesDigitais": 17600, "emissoesEvitadas_tCO2e": 4.13 },
+      { "mes": "2026-03", "funcionariosMigrados": 316, "transacoesDigitais": 17700, "emissoesEvitadas_tCO2e": 4.14 },
+      { "mes": "2026-04", "funcionariosMigrados": 318, "transacoesDigitais": 17900, "emissoesEvitadas_tCO2e": 4.17 },
+      { "mes": "2026-05", "funcionariosMigrados": 320, "transacoesDigitais": 18100, "emissoesEvitadas_tCO2e": 4.19 }
+    ]
+  }
+]

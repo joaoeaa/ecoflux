@@ -1,0 +1,44 @@
+{
+  "setores": {
+    "VAREJO": {
+      "portes": {
+        "PEQUENO":    { "mediaEmissoes_tCO2e_ano": 3.6,  "melhorEmissoes_tCO2e_ano": 7.4,  "percentis": { "p25": 2.1, "p50": 3.6, "p75": 5.5,  "p90": 6.8  } },
+        "MEDIO":      { "mediaEmissoes_tCO2e_ano": 6.4,  "melhorEmissoes_tCO2e_ano": 12.9, "percentis": { "p25": 3.6, "p50": 6.4, "p75": 9.7,  "p90": 12.0 } },
+        "GRANDE":     { "mediaEmissoes_tCO2e_ano": 9.1,  "melhorEmissoes_tCO2e_ano": 18.4, "percentis": { "p25": 5.2, "p50": 9.1, "p75": 13.8, "p90": 17.1 } },
+        "ENTERPRISE": { "mediaEmissoes_tCO2e_ano": 13.7, "melhorEmissoes_tCO2e_ano": 27.6, "percentis": { "p25": 7.8, "p50": 13.7,"p75": 20.7, "p90": 25.7 } }
+      }
+    },
+    "SERVICOS": {
+      "portes": {
+        "PEQUENO":    { "mediaEmissoes_tCO2e_ano": 1.9,  "melhorEmissoes_tCO2e_ano": 4.5,  "percentis": { "p25": 1.1, "p50": 1.9, "p75": 3.0,  "p90": 4.0  } },
+        "MEDIO":      { "mediaEmissoes_tCO2e_ano": 3.4,  "melhorEmissoes_tCO2e_ano": 7.8,  "percentis": { "p25": 2.0, "p50": 3.4, "p75": 5.2,  "p90": 7.0  } },
+        "GRANDE":     { "mediaEmissoes_tCO2e_ano": 4.8,  "melhorEmissoes_tCO2e_ano": 11.2, "percentis": { "p25": 2.8, "p50": 4.8, "p75": 7.4,  "p90": 9.9  } },
+        "ENTERPRISE": { "mediaEmissoes_tCO2e_ano": 7.2,  "melhorEmissoes_tCO2e_ano": 16.8, "percentis": { "p25": 4.2, "p50": 7.2, "p75": 11.1, "p90": 14.9 } }
+      }
+    },
+    "INDUSTRIA": {
+      "portes": {
+        "PEQUENO":    { "mediaEmissoes_tCO2e_ano": 5.7,  "melhorEmissoes_tCO2e_ano": 12.4, "percentis": { "p25": 3.2, "p50": 5.7, "p75": 8.6,  "p90": 11.2 } },
+        "MEDIO":      { "mediaEmissoes_tCO2e_ano": 10.0, "melhorEmissoes_tCO2e_ano": 21.7, "percentis": { "p25": 5.7, "p50": 10.0,"p75": 15.1, "p90": 19.6 } },
+        "GRANDE":     { "mediaEmissoes_tCO2e_ano": 14.3, "melhorEmissoes_tCO2e_ano": 31.0, "percentis": { "p25": 8.1, "p50": 14.3,"p75": 21.5, "p90": 28.0 } },
+        "ENTERPRISE": { "mediaEmissoes_tCO2e_ano": 21.5, "melhorEmissoes_tCO2e_ano": 46.5, "percentis": { "p25": 12.2,"p50": 21.5,"p75": 32.3, "p90": 42.0 } }
+      }
+    },
+    "SAUDE": {
+      "portes": {
+        "PEQUENO":    { "mediaEmissoes_tCO2e_ano": 2.5,  "melhorEmissoes_tCO2e_ano": 6.0,  "percentis": { "p25": 1.4, "p50": 2.5, "p75": 3.9,  "p90": 5.2  } },
+        "MEDIO":      { "mediaEmissoes_tCO2e_ano": 4.3,  "melhorEmissoes_tCO2e_ano": 10.5, "percentis": { "p25": 2.5, "p50": 4.3, "p75": 6.9,  "p90": 9.2  } },
+        "GRANDE":     { "mediaEmissoes_tCO2e_ano": 6.2,  "melhorEmissoes_tCO2e_ano": 15.0, "percentis": { "p25": 3.5, "p50": 6.2, "p75": 9.8,  "p90": 13.1 } },
+        "ENTERPRISE": { "mediaEmissoes_tCO2e_ano": 9.3,  "melhorEmissoes_tCO2e_ano": 22.5, "percentis": { "p25": 5.3, "p50": 9.3, "p75": 14.7, "p90": 19.7 } }
+      }
+    },
+    "EDUCACAO": {
+      "portes": {
+        "PEQUENO":    { "mediaEmissoes_tCO2e_ano": 1.6,  "melhorEmissoes_tCO2e_ano": 3.8,  "percentis": { "p25": 0.8, "p50": 1.6, "p75": 2.5,  "p90": 3.4  } },
+        "MEDIO":      { "mediaEmissoes_tCO2e_ano": 2.7,  "melhorEmissoes_tCO2e_ano": 6.7,  "percentis": { "p25": 1.5, "p50": 2.7, "p75": 4.4,  "p90": 5.9  } },
+        "GRANDE":     { "mediaEmissoes_tCO2e_ano": 3.9,  "melhorEmissoes_tCO2e_ano": 9.5,  "percentis": { "p25": 2.1, "p50": 3.9, "p75": 6.3,  "p90": 8.4  } },
+        "ENTERPRISE": { "mediaEmissoes_tCO2e_ano": 5.9,  "melhorEmissoes_tCO2e_ano": 14.3, "percentis": { "p25": 3.2, "p50": 5.9, "p75": 9.5,  "p90": 12.6 } }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "versao": "2.1",
+  "dataAtualizacao": "2026-01-01",
+  "fontes": {
+    "fatorEmissaoBR": "MCTI 2023",
+    "energiaDatacenter": "IEA 2022",
+    "emissaoPVC": "DEFRA 2023",
+    "emissaoRPVC": "DEFRA / Ecoinvent 2023",
+    "ghgProtocol": "GHG Protocol Brasil 2022",
+    "uptime": "Uptime Institute 2023"
+  },
+  "parametros": {
+    "fatorEmissaoRede_kgCO2e_kWh": 0.0916,
+    "energiaTransacaoDigital_kWh": 0.00043,
+    "PUE_datacenter": 1.58,
+    "emissaoPVCVirgem_kgCO2e_kg": 2.0,
+    "emissaoRPVC_kgCO2e_kg": 0.5,
+    "massaCartao_kg": 0.005,
+    "vidaUtilCartao_anos": 4,
+    "transacoesPorCartaoPorAno": 840,
+    "percentualRPVC_Edenred": 0.85,
+    "fatorFisicoConsolidado_tCO2e_funcionario_ano": 0.0149,
+    "fatorDigitalConsolidado_tCO2e_usuario_ano": 0.0018,
+    "delta_tCO2e_funcionario_ano": 0.0131
+  },
+  "equivalencias": {
+    "absorcaoArvore_kgCO2e_ano": 21.77,
+    "emissaoCarroFlex_kgCO2e_ano": 2400.0
+  },
+  "fabricas": [
+    { "id": 1, "cidade": "Colombo", "estado": "PR" },
+    { "id": 2, "cidade": "São Bernardo do Campo", "estado": "SP" },
+    { "id": 3, "cidade": "Cotia", "estado": "SP" }
+  ]
+}

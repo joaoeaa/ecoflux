@@ -1,438 +1,707 @@
-
 <!doctype html>
 <meta charset="utf-8">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --color-background-primary:#f3f4f6;
-  --color-border-secondary:#d1d5db;
-  --color-border-tertiary:#d1d5db;
-  --color-text-tertiary:#6b7280;
-  --color-text-secondary:#374151;
-  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --font-mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  --bg:#f3f4f6;
+  --border:#d1d5db;
+  --text-dim:#6b7280;
+  --text:#374151;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
 }
-.cv{position:relative;width:100%;height:1380px;background:var(--color-background-primary);font-family:var(--font-sans);font-size:11px;}
-.band{position:absolute;left:0;right:0;border-top:1px solid var(--color-border-secondary);z-index:1;}
-.band-lbl{position:absolute;font-size:9.5px;color:var(--color-text-tertiary);letter-spacing:.06em;font-weight:500;z-index:3;}
+body{background:var(--bg);}
+.cv{position:relative;width:940px;height:1520px;background:var(--bg);font-family:var(--font);font-size:11px;margin:0 auto;}
+
+/* bands */
+.band{position:absolute;left:0;right:0;border-top:1.5px solid var(--border);z-index:1;}
+.lbl{position:absolute;font-size:9px;color:var(--text-dim);letter-spacing:.08em;font-weight:700;text-transform:uppercase;z-index:3;background:var(--bg);padding:0 4px;}
+
+/* classes */
 .cls{position:absolute;border-radius:6px;overflow:hidden;border:1.5px solid;z-index:3;}
-.cls .hd{padding:5px 8px;font-weight:600;font-size:11.5px;text-align:center;border-bottom:1px solid rgba(0,0,0,.12);}
-.cls .hd .st{font-weight:400;font-size:9.5px;display:block;opacity:.75;}
-.cls .bd{padding:5px 8px;font-size:10.5px;line-height:1.65;border-bottom:1px solid rgba(0,0,0,.08);}
+.cls .hd{padding:5px 8px;font-weight:600;font-size:11px;text-align:center;border-bottom:1px solid rgba(0,0,0,.12);}
+.cls .hd .st{font-weight:400;font-size:9px;display:block;opacity:.8;}
+.cls .bd{padding:4px 8px;font-size:10px;line-height:1.6;border-bottom:1px solid rgba(0,0,0,.07);}
 .cls .bd:last-child{border-bottom:none;}
 .cls .bd div{white-space:nowrap;}
-.rel-lbl{position:absolute;font-size:9.5px;color:var(--color-text-secondary);background:var(--color-background-primary);padding:0 3px;white-space:nowrap;font-family:var(--font-mono);z-index:4;}
+
+/* color themes */
+.teal  .hd{background:#1D9E75;color:#fff;} .teal {background:#e8f8f2;border-color:#1D9E75;} .teal  .bd{color:#085041;}
+.purple.hd{background:#534AB7;color:#fff;} .purple{background:#f0effe;border-color:#534AB7;} .purple .bd{color:#26215C;}
+.blue  .hd{background:#185FA5;color:#fff;} .blue {background:#e6f1fb;border-color:#185FA5;} .blue  .bd{color:#042C53;}
+.coral .hd{background:#993C1D;color:#fff;} .coral{background:#faece7;border-color:#993C1D;} .coral .bd{color:#4A1B0C;}
+.amber .hd{background:#854F0B;color:#fff;} .amber{background:#faeeda;border-color:#854F0B;} .amber .bd{color:#412402;}
+.gray  .hd{background:#5F5E5A;color:#fff;} .gray {background:#f4f3ee;border-color:#5F5E5A;} .gray  .bd{color:#2C2C2A;}
+.green .hd{background:#276749;color:#fff;} .green{background:#e6f4ed;border-color:#276749;} .green .bd{color:#123A27;}
+
+.note{position:absolute;background:#fffbdd;border:1px dashed #c8a900;border-radius:5px;font-size:9.5px;padding:8px 10px;color:#555;z-index:5;line-height:1.6;}
+
 svg.conn{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2;}
 
-/* teal – frontend pages */
-.c-teal .hd{background:#1D9E75;color:#fff;}
-.c-teal{background:#e8f8f2;border-color:#1D9E75;}
-.c-teal .bd{color:#085041;}
-
-/* purple – hooks */
-.c-purple .hd{background:#534AB7;color:#fff;}
-.c-purple{background:#f0effe;border-color:#534AB7;}
-.c-purple .bd{color:#26215C;}
-
-/* blue – controllers */
-.c-blue .hd{background:#185FA5;color:#fff;}
-.c-blue{background:#e6f1fb;border-color:#185FA5;}
-.c-blue .bd{color:#042C53;}
-
-/* coral – services */
-.c-coral .hd{background:#993C1D;color:#fff;}
-.c-coral{background:#faece7;border-color:#993C1D;}
-.c-coral .bd{color:#4A1B0C;}
-
-/* amber – entities */
-.c-amber .hd{background:#854F0B;color:#fff;}
-.c-amber{background:#faeeda;border-color:#854F0B;}
-.c-amber .bd{color:#412402;}
-
-/* pink – repositories */
-.c-pink .hd{background:#993556;color:#fff;}
-.c-pink{background:#fbeaf0;border-color:#993556;}
-.c-pink .bd{color:#4B1528;}
-
-/* gray – GHGCalculator */
-.c-gray .hd{background:#5F5E5A;color:#fff;}
-.c-gray{background:#f4f3ee;border-color:#5F5E5A;}
-.c-gray .bd{color:#2C2C2A;}
+.legend{position:absolute;bottom:8px;left:16px;right:16px;font-size:9px;color:var(--text);display:flex;gap:18px;flex-wrap:wrap;align-items:center;padding:5px 0;border-top:1px solid var(--border);z-index:5;}
 </style>
 
 <div class="cv" id="cv">
 
-  <!-- BAND LABELS -->
-  <div class="band" style="top:28px;"></div>
-  <div class="band-lbl" style="top:30px;left:16px;">FRONTEND — React</div>
+<!-- ════════════════════════════════════
+     BAND 1 — FRONTEND
+     ════════════════════════════════════ -->
+<div class="band" style="top:28px"></div>
+<div class="lbl" style="top:31px;left:16px">Frontend — React 18 · Vite · TypeScript · Recharts</div>
 
-  <div class="band" style="top:258px;"></div>
-  <div class="band-lbl" style="top:260px;left:16px;">BACKEND — Controllers</div>
-
-  <div class="band" style="top:488px;"></div>
-  <div class="band-lbl" style="top:490px;left:16px;">BACKEND — Services</div>
-
-  <div class="band" style="top:718px;"></div>
-  <div class="band-lbl" style="top:720px;left:16px;">DOMAIN — Entities</div>
-
-  <div class="band" style="top:990px;"></div>
-  <div class="band-lbl" style="top:992px;left:16px;">PERSISTENCE — Repositories</div>
-
-  <!-- ===== FRONTEND ===== -->
-  <div class="cls c-teal" style="left:20px;top:46px;width:190px;" id="cp">
-    <div class="hd">CalculadoraPage</div>
-    <div class="bd">
-      <div>- empresa : String</div>
-      <div>- funcionarios : int</div>
-      <div>- modelo : String</div>
-    </div>
-    <div class="bd">
-      <div>+ calcular() : void</div>
-      <div>+ resetar() : void</div>
-    </div>
+<!-- 5 pages · each 148px wide · gap 8px · starts left:16 -->
+<div class="cls teal" style="left:16px;top:48px;width:148px;" id="pg1">
+  <div class="hd">Calculadora.tsx</div>
+  <div class="bd">
+    <div>InputPanel</div>
+    <div>ResultCard</div>
+    <div>EquivalenciasGrid</div>
+    <div>MetodologiaBadge</div>
   </div>
-
-  <div class="cls c-teal" style="left:240px;top:46px;width:190px;" id="ep">
-    <div class="hd">EvolucaoPage</div>
-    <div class="bd">
-      <div>- empresaId : Long</div>
-      <div>- periodo : DateRange</div>
-    </div>
-    <div class="bd">
-      <div>+ carregarHistorico()</div>
-      <div>+ exportarRelatorio()</div>
-    </div>
-  </div>
-
-  <div class="cls c-teal" style="left:460px;top:46px;width:196px;" id="bp">
-    <div class="hd">BenchmarkPage</div>
-    <div class="bd">
-      <div>- setor : String</div>
-      <div>- concorrentes : List</div>
-    </div>
-    <div class="bd">
-      <div>+ carregarBenchmark()</div>
-      <div>+ comparar() : void</div>
-    </div>
-  </div>
-
-  <div class="cls c-purple" style="left:240px;top:172px;width:190px;" id="ac">
-    <div class="hd"><span class="st">« hook / axios »</span>apiClient</div>
-    <div class="bd">
-      <div>+ get(url) : Promise</div>
-      <div>+ post(url,body) : Promise</div>
-    </div>
-  </div>
-
-  <!-- ===== CONTROLLERS ===== -->
-  <div class="cls c-blue" style="left:20px;top:275px;width:200px;" id="cc">
-    <div class="hd"><span class="st">«@RestController»</span>CalculadoraController</div>
-    <div class="bd">
-      <div>+ calcular(req) : ImpactoDTO</div>
-      <div>  POST /api/calc/calcular</div>
-      <div>+ historico(id) : List</div>
-    </div>
-  </div>
-
-  <div class="cls c-blue" style="left:244px;top:275px;width:196px;" id="rc">
-    <div class="hd"><span class="st">«@RestController»</span>RelatorioController</div>
-    <div class="bd">
-      <div>+ gerarPDF(id) : byte[]</div>
-      <div>  GET /api/rel/pdf/{id}</div>
-      <div>+ benchmark(s) : List</div>
-    </div>
-  </div>
-
-  <div class="cls c-blue" style="left:460px;top:275px;width:196px;" id="ec">
-    <div class="hd"><span class="st">«@RestController»</span>EmpresaController</div>
-    <div class="bd">
-      <div>+ criar(dto) : EmpresaDTO</div>
-      <div>  POST /api/empresa</div>
-      <div>+ buscar(id) : EmpresaDTO</div>
-    </div>
-  </div>
-
-  <!-- ===== SERVICES ===== -->
-  <div class="cls c-coral" style="left:20px;top:505px;width:200px;" id="cs">
-    <div class="hd"><span class="st">«@Service»</span>CalculadoraService</div>
-    <div class="bd">
-      <div>- ghgCalc : GHGCalculator</div>
-      <div>- repo : RegistroRepository</div>
-    </div>
-    <div class="bd">
-      <div>+ calcularImpacto(req)</div>
-      <div>+ salvarHistorico(r)</div>
-    </div>
-  </div>
-
-  <div class="cls c-coral" style="left:244px;top:505px;width:196px;" id="rs">
-    <div class="hd"><span class="st">«@Service»</span>RelatorioService</div>
-    <div class="bd">
-      <div>- empRepo : EmpresaRepository</div>
-      <div>- regRepo : RegistroRepository</div>
-    </div>
-    <div class="bd">
-      <div>+ gerarPDF(empresaId)</div>
-      <div>+ montarBenchmark(setor)</div>
-    </div>
-  </div>
-
-  <div class="cls c-coral" style="left:460px;top:505px;width:196px;" id="es">
-    <div class="hd"><span class="st">«@Service»</span>EmpresaService</div>
-    <div class="bd">
-      <div>- repo : EmpresaRepository</div>
-    </div>
-    <div class="bd">
-      <div>+ criar(dto) : Empresa</div>
-      <div>+ buscarPorId(id)</div>
-      <div>+ listarPorSetor(s)</div>
-    </div>
-  </div>
-
-  <div class="cls c-gray" style="left:244px;top:648px;width:196px;" id="gh">
-    <div class="hd"><span class="st">«@Component»</span>GHGCalculator</div>
-    <div class="bd">
-      <div><u>FATOR_FISICO : 0.0149</u></div>
-      <div><u>FATOR_DIGITAL : 0.0018</u></div>
-    </div>
-    <div class="bd">
-      <div>+ calcular(n:int) : double</div>
-    </div>
-  </div>
-
-  <!-- ===== ENTITIES ===== -->
-  <div class="cls c-amber" style="left:20px;top:736px;width:196px;" id="em">
-    <div class="hd"><span class="st">«@Entity»</span>Empresa</div>
-    <div class="bd">
-      <div>- id : Long  «PK»</div>
-      <div>- nome : String</div>
-      <div>- cnpj : String</div>
-      <div>- setor : String</div>
-      <div>- numFuncionarios : int</div>
-      <div>- modeloBeneficio : String</div>
-    </div>
-    <div class="bd"><div>+ getters / setters</div></div>
-  </div>
-
-  <div class="cls c-amber" style="left:240px;top:736px;width:200px;" id="ri">
-    <div class="hd"><span class="st">«@Entity»</span>RegistroImpacto</div>
-    <div class="bd">
-      <div>- id : Long  «PK»</div>
-      <div>- empresa : Empresa  «FK»</div>
-      <div>- co2Evitado : double</div>
-      <div>- arvoresEq : int</div>
-      <div>- kgPvcNaoProd : double</div>
-      <div>- dataCalculo : LocalDate</div>
-    </div>
-    <div class="bd"><div>+ getters / setters</div></div>
-  </div>
-
-  <div class="cls c-amber" style="left:460px;top:736px;width:192px;" id="us">
-    <div class="hd"><span class="st">«@Entity»</span>Usuario</div>
-    <div class="bd">
-      <div>- id : Long  «PK»</div>
-      <div>- email : String</div>
-      <div>- senha : String</div>
-      <div>- role : Role</div>
-      <div>- empresa : Empresa  «FK»</div>
-    </div>
-    <div class="bd"><div>+ getters / setters</div></div>
-  </div>
-
-  <!-- ===== REPOSITORIES ===== -->
-  <div class="cls c-pink" style="left:240px;top:1008px;width:196px;" id="jr">
-    <div class="hd"><span class="st">«interface»</span>JpaRepository&lt;T,ID&gt;</div>
-    <div class="bd">
-      <div>+ save(entity) : T</div>
-      <div>+ findById(id) : Optional</div>
-      <div>+ findAll() : List</div>
-      <div>+ delete(entity)</div>
-    </div>
-  </div>
-
-  <div class="cls c-pink" style="left:20px;top:1140px;width:196px;" id="er">
-    <div class="hd"><span class="st">«interface»</span>EmpresaRepository</div>
-    <div class="bd">
-      <div>+ findBySetor(s) : List</div>
-      <div>+ findByCnpj(c) : Optional</div>
-    </div>
-  </div>
-
-  <div class="cls c-pink" style="left:240px;top:1140px;width:196px;" id="rr">
-    <div class="hd"><span class="st">«interface»</span>RegistroRepository</div>
-    <div class="bd">
-      <div>+ findByEmpresaId(id)</div>
-      <div>  : List&lt;RegistroImpacto&gt;</div>
-    </div>
-  </div>
-
-  <div class="cls c-pink" style="left:456px;top:1140px;width:196px;" id="ur">
-    <div class="hd"><span class="st">«interface»</span>UsuarioRepository</div>
-    <div class="bd">
-      <div>+ findByEmail(e)</div>
-      <div>  : Optional&lt;Usuario&gt;</div>
-    </div>
-  </div>
-
-  <!-- LEGEND -->
-  <div style="position:absolute;bottom:6px;left:16px;right:8px;font-size:9.5px;color:var(--color-text-secondary);display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 8px;border-top:1px solid var(--color-border-tertiary);z-index:5;">
-    <span>- - -▶ depend. HTTP</span>
-    <span>——▶ associação</span>
-    <span>——△ herança (extends)</span>
-    <span>◆——▶ composição</span>
-    <span>1 · 1..* · 0..*  cardinalidade</span>
-    <span><i>itálico</i> = nome da variável</span>
-  </div>
-
-  <svg class="conn" id="svgc"></svg>
 </div>
 
+<div class="cls teal" style="left:172px;top:48px;width:148px;" id="pg2">
+  <div class="hd">Evolucao.tsx</div>
+  <div class="bd">
+    <div>KpiStrip</div>
+    <div>PeriodoFilter</div>
+    <div>EvolucaoChart</div>
+    <div style="font-size:8.5px;font-style:italic;">(Recharts LineChart)</div>
+  </div>
+</div>
+
+<div class="cls teal" style="left:328px;top:48px;width:148px;" id="pg3">
+  <div class="hd">Benchmark.tsx</div>
+  <div class="bd">
+    <div>SetorSelector</div>
+    <div>BenchmarkChart</div>
+    <div style="font-size:8.5px;font-style:italic;">(Recharts BarChart)</div>
+    <div>PercentilBadge</div>
+  </div>
+</div>
+
+<div class="cls teal" style="left:484px;top:48px;width:148px;" id="pg4">
+  <div class="hd">Relatorio.tsx</div>
+  <div class="bd">
+    <div>RelatorioPreview</div>
+    <div>ExportButton</div>
+    <div style="font-size:8.5px;font-style:italic;">PDF: jsPDF / print()</div>
+  </div>
+</div>
+
+<div class="cls teal" style="left:640px;top:48px;width:164px;" id="pg5">
+  <div class="hd">Transparencia.tsx</div>
+  <div class="bd">
+    <div>FontesTable</div>
+    <div>FabricasPanel</div>
+    <div>FronteirasPanel</div>
+  </div>
+</div>
+
+<!-- API Client — centered below pages -->
+<div class="cls purple" style="left:268px;top:190px;width:268px;" id="ac">
+  <div class="hd"><span class="st">« api / ecofluxApi.ts »</span>API Client (fetch)</div>
+  <div class="bd">
+    <div>+ calcular(req)     →  POST /api/calcular</div>
+    <div>+ getEmpresas()     →  GET  /api/empresas</div>
+    <div>+ getHistorico(id)  →  GET  /api/empresas/{id}/historico</div>
+    <div>+ getBenchmark(s,p) →  GET  /api/benchmark/{setor}/{porte}</div>
+    <div>+ getPremissas()    →  GET  /api/premissas</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     BAND 2 — CONTROLLERS
+     ════════════════════════════════════ -->
+<div class="band" style="top:320px"></div>
+<div class="lbl" style="top:323px;left:16px">Backend — Controllers (@RestController · Base URL: /api)</div>
+
+<!-- 4 controllers · widths: 185,210,195,185 · gap 8px -->
+<div class="cls blue" style="left:16px;top:340px;width:185px;" id="cc">
+  <div class="hd"><span class="st">@RestController · /api</span>CalculoController</div>
+  <div class="bd">
+    <div>+ calcular(@Valid req)</div>
+    <div style="font-size:9px;">  → CalculoResponse</div>
+    <div style="font-size:9px;">  POST /api/calcular</div>
+  </div>
+</div>
+
+<div class="cls blue" style="left:209px;top:340px;width:218px;" id="ec">
+  <div class="hd"><span class="st">@RestController · /api/empresas</span>EmpresaController</div>
+  <div class="bd">
+    <div>+ listar() : List&lt;Empresa&gt;</div>
+    <div style="font-size:9px;">  GET /api/empresas</div>
+    <div>+ historico(id) : Map</div>
+    <div style="font-size:9px;">  GET /api/empresas/{id}/historico</div>
+  </div>
+</div>
+
+<div class="cls blue" style="left:435px;top:340px;width:200px;" id="bc">
+  <div class="hd"><span class="st">@RestController · /api/benchmark</span>BenchmarkController</div>
+  <div class="bd">
+    <div>+ getBenchmark(setor, porte)</div>
+    <div style="font-size:9px;">  → BenchmarkData</div>
+    <div style="font-size:9px;">  GET /api/benchmark/{setor}/{porte}</div>
+  </div>
+</div>
+
+<div class="cls blue" style="left:643px;top:340px;width:185px;" id="pc">
+  <div class="hd"><span class="st">@RestController · /api</span>PremissasController</div>
+  <div class="bd">
+    <div>+ getPremissas()</div>
+    <div style="font-size:9px;">  → Premissas</div>
+    <div style="font-size:9px;">  GET /api/premissas</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     BAND 3 — SERVICES
+     ════════════════════════════════════ -->
+<div class="band" style="top:490px"></div>
+<div class="lbl" style="top:493px;left:16px">Backend — Services (@Service)</div>
+
+<!-- 3 services · widths: 205,205,218 · gap 8px -->
+<div class="cls coral" style="left:16px;top:510px;width:205px;" id="cs">
+  <div class="hd"><span class="st">@Service</span>CalculoService</div>
+  <div class="bd">
+    <div>- dataLoader : DataLoader</div>
+    <div>- benchmarkService : BenchmarkService</div>
+  </div>
+  <div class="bd">
+    <div>+ calcular(req) : CalculoResponse</div>
+  </div>
+</div>
+
+<div class="cls coral" style="left:229px;top:510px;width:205px;" id="es">
+  <div class="hd"><span class="st">@Service</span>EmpresaService</div>
+  <div class="bd">
+    <div>- dataLoader : DataLoader</div>
+  </div>
+  <div class="bd">
+    <div>+ listarTodas() : List&lt;Empresa&gt;</div>
+    <div>+ buscarPorId(id) : Empresa</div>
+  </div>
+</div>
+
+<div class="cls coral" style="left:442px;top:510px;width:218px;" id="bs">
+  <div class="hd"><span class="st">@Service</span>BenchmarkService</div>
+  <div class="bd">
+    <div>- dataLoader : DataLoader</div>
+  </div>
+  <div class="bd">
+    <div>+ getBenchmark(s,p) : BenchmarkData</div>
+    <div>+ getMediaSetor(s) : double</div>
+    <div>+ calcularPercentil(v,s) : int</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     BAND 4 — DOMAIN
+     ════════════════════════════════════ -->
+<div class="band" style="top:660px"></div>
+<div class="lbl" style="top:663px;left:16px">Domain — Models &amp; DTOs &nbsp;·&nbsp; Enums &nbsp;&nbsp; ⚠ sem @Entity — MVP usa JSON em memória</div>
+
+<!-- ── ROW 1: DTOs + Models ── -->
+
+<!-- CalculoRequest: left:16 w:194 -->
+<div class="cls amber" style="left:16px;top:682px;width:194px;" id="m-req">
+  <div class="hd"><span class="st">« DTO »</span>CalculoRequest</div>
+  <div class="bd">
+    <div>- nomeEmpresa : String</div>
+    <div>- funcionarios : int</div>
+    <div>- modeloAtual : ModeloBeneficio</div>
+    <div>- tiposBeneficio : List&lt;TipoBeneficio&gt;</div>
+    <div>- percentualMigracao : int = 100</div>
+  </div>
+</div>
+
+<!-- CalculoResponse: left:218 w:220 -->
+<div class="cls amber" style="left:218px;top:682px;width:220px;" id="m-res">
+  <div class="hd"><span class="st">« DTO »</span>CalculoResponse</div>
+  <div class="bd">
+    <div>- nomeEmpresa : String</div>
+    <div>- funcionariosMigrados : int</div>
+    <div>- emissoesEvitadas_tCO2e_ano : double</div>
+    <div>- emissoesEvitadas_kgCO2e_ano : double</div>
+    <div>- fatorFisico_tCO2e : double</div>
+    <div>- fatorDigital_tCO2e : double</div>
+    <div>- delta_tCO2e : double</div>
+    <div>- equivalencias : Equivalencias</div>
+    <div>- setor : String</div>
+    <div>- mediaSetor_tCO2e_ano : double</div>
+    <div>- posicaoPercentil : int</div>
+    <div>- metodologia : String</div>
+    <div>- versaoMetodologia : String</div>
+    <div>- dataCalculo : LocalDate</div>
+  </div>
+</div>
+
+<!-- Empresa: left:446 w:178 -->
+<div class="cls amber" style="left:446px;top:682px;width:178px;" id="m-emp">
+  <div class="hd"><span class="st">« Model »</span>Empresa</div>
+  <div class="bd">
+    <div>- id : String</div>
+    <div>- nome : String</div>
+    <div>- setor : Setor</div>
+    <div>- porte : Porte</div>
+    <div>- funcionarios : int</div>
+    <div>- modeloAtual : ModeloBeneficio</div>
+    <div>- tiposBeneficio : List&lt;TipoBeneficio&gt;</div>
+    <div>- dataContrato : LocalDate</div>
+    <div>- historico : List&lt;HistoricoMes&gt;</div>
+  </div>
+</div>
+
+<!-- HistoricoMes: left:674 w:178 (gap de 50px após m-emp right:624) -->
+<div class="cls amber" style="left:674px;top:682px;width:178px;" id="m-hist">
+  <div class="hd"><span class="st">« Model »</span>HistoricoMes</div>
+  <div class="bd">
+    <div>- mes : String</div>
+    <div>- funcionariosMigrados : int</div>
+    <div>- transacoesDigitais : int</div>
+    <div>- emissoesEvitadas_tCO2e : double</div>
+  </div>
+</div>
+
+<!-- ── ROW 2: remaining models + enums ── -->
+<!-- Starts at top:970 (CalculoResponse has 14 fields ≈ 268px → 682+268=950, gap 20) -->
+
+<!-- Equivalencias: left:16 w:182 -->
+<div class="cls amber" style="left:16px;top:970px;width:182px;" id="m-eq">
+  <div class="hd"><span class="st">« Model »</span>Equivalencias</div>
+  <div class="bd">
+    <div>- arvoresEquivalentes : int</div>
+    <div>- carrosRetirados : int</div>
+    <div>- kgPVCNaoProduzido : double</div>
+  </div>
+</div>
+
+<!-- BenchmarkData: left:206 w:198 -->
+<div class="cls amber" style="left:206px;top:970px;width:198px;" id="m-bench">
+  <div class="hd"><span class="st">« Model »</span>BenchmarkData</div>
+  <div class="bd">
+    <div>- setor : String</div>
+    <div>- porte : String</div>
+    <div>- mediaEmissoes_tCO2e_ano : double</div>
+    <div>- melhorEmissoes_tCO2e_ano : double</div>
+    <div>- percentis : Map&lt;String, Double&gt;</div>
+  </div>
+</div>
+
+<!-- Premissas: left:412 w:192 -->
+<div class="cls amber" style="left:412px;top:970px;width:192px;" id="m-prem">
+  <div class="hd"><span class="st">« Model »</span>Premissas</div>
+  <div class="bd">
+    <div>- versao : String</div>
+    <div>- dataAtualizacao : String</div>
+    <div>- fontes : Map&lt;String, String&gt;</div>
+    <div>- parametros : ParametrosCalculo</div>
+    <div>- equivalencias : EquivalenciasConfig</div>
+    <div>- fabricas : List&lt;Fabrica&gt;</div>
+  </div>
+</div>
+
+<!-- Enums column — right side, two stacked -->
+<!-- ModeloBeneficio: left:618 w:152 top:970 -->
+<div class="cls gray" style="left:618px;top:970px;width:152px;" id="e-mb">
+  <div class="hd"><span class="st">«enum»</span>ModeloBeneficio</div>
+  <div class="bd">
+    <div>VALE_PAPEL</div>
+    <div>FISICO_PVC</div>
+    <div>FISICO_RPVC</div>
+    <div>MISTO</div>
+  </div>
+</div>
+
+<!-- TipoBeneficio: left:778 w:146 top:970 -->
+<div class="cls gray" style="left:778px;top:970px;width:146px;" id="e-tb">
+  <div class="hd"><span class="st">«enum»</span>TipoBeneficio</div>
+  <div class="bd">
+    <div>VA</div>
+    <div>VR</div>
+    <div>MOBILIDADE</div>
+  </div>
+</div>
+
+<!-- Setor: left:618 w:152 top:1085 (ModeloBeneficio ≈ 105px → 970+105+10=1085) -->
+<div class="cls gray" style="left:618px;top:1085px;width:152px;" id="e-set">
+  <div class="hd"><span class="st">«enum»</span>Setor</div>
+  <div class="bd">
+    <div>VAREJO</div>
+    <div>SERVICOS</div>
+    <div>INDUSTRIA</div>
+    <div>SAUDE</div>
+    <div>EDUCACAO</div>
+  </div>
+</div>
+
+<!-- Porte: left:778 w:146 top:1085 -->
+<div class="cls gray" style="left:778px;top:1085px;width:146px;" id="e-por">
+  <div class="hd"><span class="st">«enum»</span>Porte</div>
+  <div class="bd">
+    <div>PEQUENO  (até 100)</div>
+    <div>MEDIO    (100–500)</div>
+    <div>GRANDE   (500–2000)</div>
+    <div>ENTERPRISE (2000+)</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     BAND 5 — CONFIG
+     Setor bottom ≈ 1085+120=1205 → band at 1220
+     ════════════════════════════════════ -->
+<div class="band" style="top:1220px"></div>
+<div class="lbl" style="top:1223px;left:16px">Config — Infraestrutura Spring Boot</div>
+
+<!-- CorsConfig: left:16 top:1240 w:200 -->
+<div class="cls gray" style="left:16px;top:1240px;width:200px;" id="cfg-cors">
+  <div class="hd"><span class="st">@Configuration</span>CorsConfig</div>
+  <div class="bd">
+    <div>allowedOrigins: localhost:5173</div>
+    <div>allowedMethods: GET, POST</div>
+  </div>
+</div>
+
+<!-- DataLoader: left:224 top:1240 w:242 -->
+<div class="cls gray" style="left:224px;top:1240px;width:242px;" id="cfg-dl">
+  <div class="hd"><span class="st">@Component · @PostConstruct</span>DataLoader</div>
+  <div class="bd">
+    <div>- premissas : Premissas</div>
+    <div>- empresas  : List&lt;Empresa&gt;</div>
+    <div>- benchmark : Map</div>
+  </div>
+  <div class="bd">
+    <div>+ load() : void  ← lê os 3 JSONs</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     BAND 6 — DATA
+     DataLoader bottom ≈ 1240+115=1355 → band at 1372
+     ════════════════════════════════════ -->
+<div class="band" style="top:1372px"></div>
+<div class="lbl" style="top:1375px;left:16px">Data — Arquivos JSON (src/main/resources/data/)</div>
+
+<!-- premissas.json: left:16 top:1392 w:168 -->
+<div class="cls green" style="left:16px;top:1392px;width:168px;" id="j-prem">
+  <div class="hd">premissas.json</div>
+  <div class="bd">
+    <div>versao, dataAtualizacao</div>
+    <div>fontes, parametros</div>
+    <div>equivalencias, fabricas[ ]</div>
+  </div>
+</div>
+
+<!-- empresas.json: left:192 top:1392 w:168 -->
+<div class="cls green" style="left:192px;top:1392px;width:168px;" id="j-emp">
+  <div class="hd">empresas.json</div>
+  <div class="bd">
+    <div>id, nome, setor, porte</div>
+    <div>funcionarios, modeloAtual</div>
+    <div>historico[ ] (12 meses)</div>
+  </div>
+</div>
+
+<!-- benchmark.json: left:368 top:1392 w:168 -->
+<div class="cls green" style="left:368px;top:1392px;width:168px;" id="j-bench">
+  <div class="hd">benchmark.json</div>
+  <div class="bd">
+    <div>setores: { VAREJO, SERVICOS,</div>
+    <div>INDUSTRIA, SAUDE, EDUCACAO }</div>
+    <div>media, melhor, percentis</div>
+  </div>
+</div>
+
+<!-- Note: left:550 top:1392 w:372 -->
+<div class="note" style="left:550px;top:1392px;width:372px;">
+  <strong>MVP Acadêmico — sem banco de dados</strong><br>
+  O DataLoader carrega os 3 arquivos JSON em memória na inicialização<br>
+  via <code>@PostConstruct</code>. Não há Spring Data JPA nem <code>@Entity</code>.<br><br>
+  <strong>V1 (produto real):</strong> PostgreSQL + Spring Data JPA + Spring Security + JWT<br>
+  <strong>V1 (PDF backend):</strong> iText ou JasperReports (MVP usa jsPDF no frontend)
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span>◆——▶ composição (todo ◆ ——→ parte)</span>
+  <span>——▶ associação · multiplicidade: 1 · 0..* · 1..*</span>
+  <span>- - -▶ dependência (uses) · dashed = enum ou HTTP</span>
+  <span>Stack: Spring Boot 3.5 · Java 21 · Lombok · Jackson · sem JPA</span>
+</div>
+
+<svg class="conn" id="svgc"></svg>
+</div><!-- /cv -->
+
 <script>
-window.addEventListener('load',()=>{
-  const cv=document.getElementById('cv');
-  const svg=document.getElementById('svgc');
-  const CR=cv.getBoundingClientRect();
-  svg.setAttribute('viewBox',`0 0 ${cv.offsetWidth} ${cv.offsetHeight}`);
+window.addEventListener('load', () => {
+  const cv  = document.getElementById('cv');
+  const svg = document.getElementById('svgc');
+  const CR  = cv.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${cv.offsetWidth} ${cv.offsetHeight}`);
 
-  function g(id){
-    const r=document.getElementById(id).getBoundingClientRect();
-    const x=r.left-CR.left,y=r.top-CR.top;
-    return{x,y,w:r.width,h:r.height,
-      cx:x+r.width/2,cy:y+r.height/2,
-      top:y,bot:y+r.height,left:x,right:x+r.width};
+  /* ── markers ── */
+  const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+  function mkMarker(id, color) {
+    const m = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+    m.setAttribute('id', id);
+    m.setAttribute('viewBox', '0 0 10 10');
+    m.setAttribute('refX', '9'); m.setAttribute('refY', '5');
+    m.setAttribute('markerWidth', '6'); m.setAttribute('markerHeight', '6');
+    m.setAttribute('orient', 'auto-start-reverse');
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', 'M0 1L9 5L0 9');
+    p.setAttribute('stroke', color); p.setAttribute('stroke-width', '1.5');
+    p.setAttribute('fill', 'none');
+    m.appendChild(p); defs.appendChild(m);
   }
-
-  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
-
-  function mkM(id,d,fill,rx='11',ry='6',vb='0 0 12 12',mw='7',mh='7'){
-    const m=document.createElementNS('http://www.w3.org/2000/svg','marker');
-    m.setAttribute('id',id);m.setAttribute('viewBox',vb);
-    m.setAttribute('refX',rx);m.setAttribute('refY',ry);
-    m.setAttribute('markerWidth',mw);m.setAttribute('markerHeight',mh);
-    m.setAttribute('orient','auto-start-reverse');
-    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-    p.setAttribute('d',d);p.setAttribute('stroke','#555');p.setAttribute('stroke-width','1.2');
-    p.setAttribute('fill',fill);m.appendChild(p);defs.appendChild(m);
-  }
-
-  // open arrow – association
-  mkM('marr','M1 2L10 6L1 10','none');
-  // hollow triangle – herança
-  mkM('mher','M1 1L11 6L1 11Z','var(--color-background-primary)');
-  // filled diamond – composição (placed at start)
-  mkM('mdia','M8 0L16 6L8 12L0 6Z','#555','1','6','0 0 16 12','10','10');
-
+  mkMarker('arr-gray',   '#888');
+  mkMarker('arr-blue',   '#185FA5');
+  mkMarker('arr-teal',   '#1D9E75');
+  mkMarker('arr-green',  '#276749');
   svg.appendChild(defs);
 
-  function ln(x1,y1,x2,y2,dash,mEnd,mStart,color){
-    const l=document.createElementNS('http://www.w3.org/2000/svg','line');
-    l.setAttribute('x1',x1);l.setAttribute('y1',y1);
-    l.setAttribute('x2',x2);l.setAttribute('y2',y2);
-    l.setAttribute('stroke',color||'#666');l.setAttribute('stroke-width','1.3');
-    if(dash)l.setAttribute('stroke-dasharray','5 3');
-    if(mEnd)l.setAttribute('marker-end',mEnd);
-    if(mStart)l.setAttribute('marker-start',mStart);
-    svg.appendChild(l);
+  /* ── helpers ── */
+  function box(id) {
+    const el = document.getElementById(id);
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    const x = r.left - CR.left, y = r.top - CR.top;
+    return { cx: x + r.width/2, cy: y + r.height/2,
+             top: y, bot: y + r.height,
+             left: x, right: x + r.width };
   }
 
-  function pt(d,dash,mEnd,mStart,color){
-    const el=document.createElementNS('http://www.w3.org/2000/svg','path');
-    el.setAttribute('d',d);el.setAttribute('fill','none');
-    el.setAttribute('stroke',color||'#666');el.setAttribute('stroke-width','1.3');
-    if(dash)el.setAttribute('stroke-dasharray','5 3');
-    if(mEnd)el.setAttribute('marker-end',mEnd);
-    if(mStart)el.setAttribute('marker-start',mStart);
+  function line(x1, y1, x2, y2, { dash=false, marker='arr-gray', color='#aaa', width=1.3 }={}) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    el.setAttribute('x1', x1); el.setAttribute('y1', y1);
+    el.setAttribute('x2', x2); el.setAttribute('y2', y2);
+    el.setAttribute('stroke', color); el.setAttribute('stroke-width', width);
+    if (dash) el.setAttribute('stroke-dasharray', '5 3');
+    el.setAttribute('marker-end', `url(#${marker})`);
     svg.appendChild(el);
   }
 
-  function lb(x,y,txt,italic){
-    const d=document.createElement('div');
-    d.className='rel-lbl';
-    d.style.cssText=`position:absolute;left:${x}px;top:${y}px;font-size:9.5px;color:var(--color-text-secondary);background:var(--color-background-primary);padding:0 2px;white-space:nowrap;font-family:var(--font-mono);${italic?'font-style:italic':''}`;
-    d.textContent=txt;
-    cv.appendChild(d);
+  function path(d, { dash=false, marker='arr-gray', color='#aaa', width=1.3 }={}) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    el.setAttribute('d', d); el.setAttribute('fill', 'none');
+    el.setAttribute('stroke', color); el.setAttribute('stroke-width', width);
+    if (dash) el.setAttribute('stroke-dasharray', '5 3');
+    el.setAttribute('marker-end', `url(#${marker})`);
+    svg.appendChild(el);
   }
 
-  const CP=g('cp'),EP=g('ep'),BP=g('bp'),AC=g('ac');
-  const CC=g('cc'),RC=g('rc'),EC=g('ec');
-  const CS=g('cs'),RS=g('rs'),ES=g('es'),GH=g('gh');
-  const EM=g('em'),RI=g('ri'),US=g('us');
-  const JR=g('jr'),ER=g('er'),RR=g('rr'),UR=g('ur');
+  /* ── read positions ── */
+  const PG = ['pg1','pg2','pg3','pg4','pg5'].map(box);
+  const AC  = box('ac');
+  const CC  = box('cc'), EC = box('ec'), BC = box('bc'), PC = box('pc');
+  const CS  = box('cs'), ES = box('es'), BS = box('bs');
+  const DL  = box('cfg-dl');
+  const JP  = box('j-prem'), JE = box('j-emp'), JB = box('j-bench');
 
-  // ── Pages → apiClient (associação)
-  ln(CP.cx,CP.bot,AC.left+28,AC.top,false,'url(#marr)');
-  ln(EP.cx,EP.bot,AC.cx,AC.top,false,'url(#marr)');
-  ln(BP.cx,BP.bot,AC.right-28,AC.top,false,'url(#marr)');
+  /* ══════════════════════════════════════
+     1. Pages → API Client
+        fan-in through a horizontal rail
+     ══════════════════════════════════════ */
+  const railY = AC.top - 14;
 
-  // ── apiClient → Controllers (dependência HTTP, tracejado)
-  ln(AC.left+22,AC.bot,CC.cx,CC.top,true,'url(#marr)');
-  ln(AC.cx,AC.bot,RC.cx,RC.top,true,'url(#marr)');
-  ln(AC.right-22,AC.bot,EC.cx,EC.top,true,'url(#marr)');
+  // horizontal rail line (decorative only — arrows handle it)
+  const railX1 = PG[0].cx, railX2 = PG[4].cx;
+  const railEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  railEl.setAttribute('x1', railX1); railEl.setAttribute('y1', railY);
+  railEl.setAttribute('x2', railX2); railEl.setAttribute('y2', railY);
+  railEl.setAttribute('stroke', '#1D9E75'); railEl.setAttribute('stroke-width', '1.2');
+  svg.appendChild(railEl);
 
-  // ── Controllers → Services (associação)
-  ln(CC.cx,CC.bot,CS.cx,CS.top,false,'url(#marr)');
-  ln(RC.cx,RC.bot,RS.cx,RS.top,false,'url(#marr)');
-  ln(EC.cx,EC.bot,ES.cx,ES.top,false,'url(#marr)');
+  PG.forEach(p => {
+    // vertical drop from page to rail
+    const lv = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    lv.setAttribute('x1', p.cx); lv.setAttribute('y1', p.bot);
+    lv.setAttribute('x2', p.cx); lv.setAttribute('y2', railY);
+    lv.setAttribute('stroke', '#1D9E75'); lv.setAttribute('stroke-width', '1.2');
+    svg.appendChild(lv);
+  });
 
-  // ── CalculadoraService.ghgCalc → GHGCalculator (associação 1:1)
-  pt(`M${CS.right} ${CS.cy+8} L${GH.left} ${GH.cy-8}`,false,'url(#marr)');
-  lb((CS.right+GH.left)/2-30,(CS.cy+GH.cy)/2-18,'ghgCalc',true);
-  lb((CS.right+GH.left)/2+16,(CS.cy+GH.cy)/2-18,'1');
+  // single arrow from rail midpoint down to AC
+  line(AC.cx, railY, AC.cx, AC.top, { marker: 'arr-teal', color: '#1D9E75' });
 
-  // ── Services → Entities (associação)
-  ln(CS.cx,CS.bot,EM.cx,EM.top,false,'url(#marr)');
-  ln(RS.cx,RS.bot,RI.cx,RI.top,false,'url(#marr)');
-  ln(ES.cx,ES.bot,US.cx,US.top,false,'url(#marr)');
+  /* ══════════════════════════════════════
+     2. API Client → Controllers (HTTP, dashed)
+        route through a distribution rail
+     ══════════════════════════════════════ */
+  const distY = AC.bot + 8;
 
-  // ── Empresa ◆──1..* RegistroImpacto (composição)
-  //    variável: empresa  |  cardinalidade: 1 ——◆ 1..*
-  const ex1=EM.right, ey1=EM.cy+8;
-  const ex2=RI.left,  ey2=RI.cy+8;
-  ln(ex1,ey1,ex2,ey2,false,'url(#marr)','url(#mdia)');
-  lb(ex1+4,ey1-14,'1');
-  lb((ex1+ex2)/2-18,ey1-14,'empresa',true);
-  lb(ex2-28,ey2-14,'1..*');
+  // spread points on AC bottom
+  const acSpread = [AC.left+22, AC.cx-8, AC.cx+8, AC.right-22];
+  const ctrlTops = [CC, EC, BC, PC];
 
-  // ── Empresa ◆──0..* Usuario (composição)
-  //    variável: empresa  |  cardinalidade: 1 ——◆ 0..*
-  const routeY=EM.top-20;
-  pt(`M${EM.right} ${EM.cy-14} L${EM.right+16} ${EM.cy-14} L${EM.right+16} ${routeY} L${US.left-16} ${routeY} L${US.left-16} ${US.cy-14} L${US.left} ${US.cy-14}`,
-    false,'url(#marr)','url(#mdia)');
-  lb(EM.right+20,routeY-14,'empresa',true);
-  lb(EM.right+4,EM.cy-28,'1');
-  lb(US.left-28,US.cy-28,'0..*');
+  // distribution rail
+  const drEl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  drEl.setAttribute('x1', acSpread[0]); drEl.setAttribute('y1', distY);
+  drEl.setAttribute('x2', acSpread[3]); drEl.setAttribute('y2', distY);
+  drEl.setAttribute('stroke', '#185FA5'); drEl.setAttribute('stroke-width', '1.2');
+  drEl.setAttribute('stroke-dasharray', '5 3');
+  svg.appendChild(drEl);
 
-  // ── Entities → Repositories (associação de uso)
-  ln(EM.cx,EM.bot,ER.cx,ER.top,false,'url(#marr)');
-  ln(RI.cx,RI.bot,RR.cx,RR.top,false,'url(#marr)');
-  ln(US.cx,US.bot,UR.cx,UR.top,false,'url(#marr)');
+  acSpread.forEach((ax, i) => {
+    const ctrl = ctrlTops[i];
+    // from AC bottom to rail
+    const lv = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    lv.setAttribute('x1', ax); lv.setAttribute('y1', AC.bot);
+    lv.setAttribute('x2', ax); lv.setAttribute('y2', distY);
+    lv.setAttribute('stroke', '#185FA5'); lv.setAttribute('stroke-width', '1.2');
+    lv.setAttribute('stroke-dasharray', '5 3');
+    svg.appendChild(lv);
+    // from rail down to controller
+    path(`M${ax} ${distY} L${ax} ${CC.top - 8} L${ctrl.cx} ${CC.top - 8} L${ctrl.cx} ${ctrl.top}`,
+         { dash: true, marker: 'arr-blue', color: '#185FA5' });
+  });
 
-  // ── Repositories extends JpaRepository (herança – triângulo vazio)
-  pt(`M${ER.cx} ${ER.top} L${JR.left+32} ${JR.bot}`,false,null,'url(#mher)');
-  lb(ER.cx-8,(ER.top+JR.bot)/2,'extends');
+  /* ══════════════════════════════════════
+     3. Controllers → Services (solid)
+     ══════════════════════════════════════ */
+  const pairs = [[CC, CS], [EC, ES], [BC, BS]];
+  pairs.forEach(([ctrl, svc]) => {
+    line(ctrl.cx, ctrl.bot, svc.cx, svc.top, { marker: 'arr-gray', color: '#666' });
+  });
 
-  ln(RR.cx,RR.top,JR.cx,JR.bot,false,null,'url(#mher)');
-  lb(RR.cx+4,(RR.top+JR.bot)/2,'extends');
+  /* ══════════════════════════════════════
+     DOMAIN MODEL RELATIONSHIPS
+     ══════════════════════════════════════ */
 
-  pt(`M${UR.cx} ${UR.top} L${JR.right-32} ${JR.bot}`,false,null,'url(#mher)');
-  lb(UR.cx-16,(UR.top+JR.bot)/2,'extends');
+  // helpers: filled diamond polygon and SVG text label
+  function diamond(cx, cy, fill) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    el.setAttribute('points', `${cx},${cy-5} ${cx+9},${cy} ${cx},${cy+5} ${cx-9},${cy}`);
+    el.setAttribute('fill', fill);
+    el.setAttribute('stroke', '#555');
+    el.setAttribute('stroke-width', '1.2');
+    svg.appendChild(el);
+  }
 
-  // ── Services.repo → Repositories (associação injetada, tracejado)
-  // CalculadoraService.repo → RegistroRepository
-  const leftRail=CS.left-18;
-  pt(`M${CS.left} ${CS.cy+10} L${leftRail} ${CS.cy+10} L${leftRail} ${ER.cy} L${ER.left} ${ER.cy}`,
-    true,'url(#marr)');
-  lb(leftRail-34,CS.cy,'repo',true);
-  lb(ER.left-14,ER.cy-12,'1');
+  function lbl(x, y, text, anchor) {
+    const el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    el.setAttribute('x', x); el.setAttribute('y', y);
+    el.setAttribute('font-size', '9.5');
+    el.setAttribute('font-family', 'monospace');
+    el.setAttribute('fill', '#333');
+    el.setAttribute('text-anchor', anchor || 'start');
+    el.setAttribute('dominant-baseline', 'middle');
+    el.textContent = text;
+    svg.appendChild(el);
+  }
 
-  // RelatorioService.regRepo → RegistroRepository
-  ln(RS.cx,RS.bot,RR.cx,RR.top,true,'url(#marr)');
-  lb(RS.cx+4,(RS.bot+RR.top)/2,'regRepo  1',true);
+  const EMP  = box('m-emp');
+  const HIST = box('m-hist');
+  const CRES = box('m-res');
+  const EQ   = box('m-eq');
+  const MREQ = box('m-req');
+  const EMB  = box('e-mb');
+  const ETB  = box('e-tb');
+  const ESET = box('e-set');
+  const EPOR = box('e-por');
 
-  // EmpresaService.repo → EmpresaRepository
-  const rightRail=ES.right+18;
-  pt(`M${ES.right} ${ES.cy+10} L${rightRail} ${ES.cy+10} L${rightRail} ${ER.cy-12} L${ER.right} ${ER.cy-12}`,
-    true,'url(#marr)');
-  lb(rightRail+2,ES.cy,'repo  1',true);
+  // ─────────────────────────────────────
+  // R1: Empresa ◆——0..* HistoricoMes
+  //     L-shape through the 50px gap between the boxes
+  // ─────────────────────────────────────
+  if (EMP && HIST) {
+    const dY  = EMP.top + 38;          // y inside Empresa's upper area
+    const hY  = HIST.top + 25;         // y inside HistoricoMes upper area
+    const midX = EMP.right + (HIST.left - EMP.right) / 2; // center of gap
+
+    // diamond at Empresa's right edge (composition = Empresa owns HistoricoMes)
+    diamond(EMP.right + 9, dY, '#555');
+
+    // path: from diamond tip → horizontal → bend → HistoricoMes left
+    path(`M${EMP.right+18} ${dY} L${midX} ${dY} L${midX} ${hY} L${HIST.left} ${hY}`,
+         { marker: 'arr-gray', color: '#555' });
+
+    // multiplicity labels
+    lbl(EMP.right + 20, dY - 11, '1');
+    lbl(HIST.left - 4,  hY - 11, '0..*', 'end');
+  }
+
+  // ─────────────────────────────────────
+  // R2: CalculoResponse ——1 Equivalencias
+  //     L-shape between rows
+  // ─────────────────────────────────────
+  if (CRES && EQ) {
+    const midY = CRES.bot + (EQ.top - CRES.bot) / 2;
+    path(`M${CRES.cx} ${CRES.bot} L${CRES.cx} ${midY} L${EQ.cx} ${midY} L${EQ.cx} ${EQ.top}`,
+         { marker: 'arr-gray', color: '#555' });
+
+    lbl(CRES.cx + 4, CRES.bot + 9,  '1');
+    lbl(EQ.cx  + 4, EQ.top  - 9,   '1');
+  }
+
+  // ─────────────────────────────────────
+  // R3: Empresa ——1..* TipoBeneficio (dashed)
+  //     Route: Empresa bottom → down-right rail → ETB top
+  // ─────────────────────────────────────
+  if (EMP && ETB) {
+    const railX = EMP.right + 25;      // vertical rail in the gap
+    const jY    = ETB.top - 12;        // horizontal junction y above enums row
+    path(`M${EMP.cx} ${EMP.bot} L${EMP.cx} ${jY} L${ETB.cx} ${jY} L${ETB.cx} ${ETB.top}`,
+         { dash: true, marker: 'arr-gray', color: '#888' });
+    lbl(EMP.cx  + 4, EMP.bot  + 9,  '1');
+    lbl(ETB.cx  + 4, ETB.top  - 9,  '1..*');
+  }
+
+  // ─────────────────────────────────────
+  // R4: Empresa ——1 ModeloBeneficio (dashed)
+  //     Route: shares vertical from R3 then branches left to EMB
+  // ─────────────────────────────────────
+  if (EMP && EMB) {
+    const jY = ETB.top - 12;
+    path(`M${EMP.cx} ${EMP.bot} L${EMP.cx} ${jY} L${EMB.cx} ${jY} L${EMB.cx} ${EMB.top}`,
+         { dash: true, marker: 'arr-gray', color: '#888' });
+    lbl(EMB.cx + 4, EMB.top - 9, '1');
+  }
+
+  // ─────────────────────────────────────
+  // R5: CalculoRequest ——1 ModeloBeneficio (dashed)
+  //     Route: m-req right → bend down → EMB top-left
+  // ─────────────────────────────────────
+  if (MREQ && EMB) {
+    const jY = EMB.top - 28;
+    path(`M${MREQ.right} ${MREQ.cy} L${EMB.left} ${MREQ.cy} L${EMB.left} ${EMB.top}`,
+         { dash: true, marker: 'arr-gray', color: '#888' });
+    lbl(MREQ.right + 4, MREQ.cy - 10, '1');
+    lbl(EMB.left   + 4, EMB.top  - 9,  '1', 'start');
+  }
+
+  // ─────────────────────────────────────
+  // R6: Empresa ——1 Setor  (dashed, enum row 2)
+  //     Route: Empresa bottom → down-left → ESET top
+  // ─────────────────────────────────────
+  if (EMP && ESET) {
+    const jY = ESET.top - 12;
+    path(`M${EMP.right} ${EMP.cy} L${ESET.cx} ${EMP.cy} L${ESET.cx} ${ESET.top}`,
+         { dash: true, marker: 'arr-gray', color: '#bbb' });
+    lbl(ESET.cx + 4, ESET.top - 9, '1');
+  }
+
+  // ─────────────────────────────────────
+  // R7: Empresa ——1 Porte  (dashed, enum row 2)
+  // ─────────────────────────────────────
+  if (EMP && EPOR) {
+    path(`M${EMP.right} ${EMP.cy + 14} L${EPOR.cx} ${EMP.cy + 14} L${EPOR.cx} ${EPOR.top}`,
+         { dash: true, marker: 'arr-gray', color: '#bbb' });
+    lbl(EPOR.cx + 4, EPOR.top - 9, '1');
+  }
+
+  /* ══════════════════════════════════════
+     4. DataLoader → JSON files
+     ══════════════════════════════════════ */
+  if (DL && JP && JE && JB) {
+    line(DL.left + 28, DL.bot, JP.cx, JP.top,  { marker: 'arr-green', color: '#276749' });
+    line(DL.cx,         DL.bot, JE.cx, JE.top,  { marker: 'arr-green', color: '#276749' });
+    line(DL.right - 28, DL.bot, JB.cx, JB.top,  { marker: 'arr-green', color: '#276749' });
+  }
 });
 </script>

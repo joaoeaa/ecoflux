@@ -1,0 +1,438 @@
+
+<!doctype html>
+<meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --color-background-primary:#f3f4f6;
+  --color-border-secondary:#d1d5db;
+  --color-border-tertiary:#d1d5db;
+  --color-text-tertiary:#6b7280;
+  --color-text-secondary:#374151;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+.cv{position:relative;width:100%;height:1380px;background:var(--color-background-primary);font-family:var(--font-sans);font-size:11px;}
+.band{position:absolute;left:0;right:0;border-top:1px solid var(--color-border-secondary);z-index:1;}
+.band-lbl{position:absolute;font-size:9.5px;color:var(--color-text-tertiary);letter-spacing:.06em;font-weight:500;z-index:3;}
+.cls{position:absolute;border-radius:6px;overflow:hidden;border:1.5px solid;z-index:3;}
+.cls .hd{padding:5px 8px;font-weight:600;font-size:11.5px;text-align:center;border-bottom:1px solid rgba(0,0,0,.12);}
+.cls .hd .st{font-weight:400;font-size:9.5px;display:block;opacity:.75;}
+.cls .bd{padding:5px 8px;font-size:10.5px;line-height:1.65;border-bottom:1px solid rgba(0,0,0,.08);}
+.cls .bd:last-child{border-bottom:none;}
+.cls .bd div{white-space:nowrap;}
+.rel-lbl{position:absolute;font-size:9.5px;color:var(--color-text-secondary);background:var(--color-background-primary);padding:0 3px;white-space:nowrap;font-family:var(--font-mono);z-index:4;}
+svg.conn{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2;}
+
+/* teal – frontend pages */
+.c-teal .hd{background:#1D9E75;color:#fff;}
+.c-teal{background:#e8f8f2;border-color:#1D9E75;}
+.c-teal .bd{color:#085041;}
+
+/* purple – hooks */
+.c-purple .hd{background:#534AB7;color:#fff;}
+.c-purple{background:#f0effe;border-color:#534AB7;}
+.c-purple .bd{color:#26215C;}
+
+/* blue – controllers */
+.c-blue .hd{background:#185FA5;color:#fff;}
+.c-blue{background:#e6f1fb;border-color:#185FA5;}
+.c-blue .bd{color:#042C53;}
+
+/* coral – services */
+.c-coral .hd{background:#993C1D;color:#fff;}
+.c-coral{background:#faece7;border-color:#993C1D;}
+.c-coral .bd{color:#4A1B0C;}
+
+/* amber – entities */
+.c-amber .hd{background:#854F0B;color:#fff;}
+.c-amber{background:#faeeda;border-color:#854F0B;}
+.c-amber .bd{color:#412402;}
+
+/* pink – repositories */
+.c-pink .hd{background:#993556;color:#fff;}
+.c-pink{background:#fbeaf0;border-color:#993556;}
+.c-pink .bd{color:#4B1528;}
+
+/* gray – GHGCalculator */
+.c-gray .hd{background:#5F5E5A;color:#fff;}
+.c-gray{background:#f4f3ee;border-color:#5F5E5A;}
+.c-gray .bd{color:#2C2C2A;}
+</style>
+
+<div class="cv" id="cv">
+
+  <!-- BAND LABELS -->
+  <div class="band" style="top:28px;"></div>
+  <div class="band-lbl" style="top:30px;left:16px;">FRONTEND — React</div>
+
+  <div class="band" style="top:258px;"></div>
+  <div class="band-lbl" style="top:260px;left:16px;">BACKEND — Controllers</div>
+
+  <div class="band" style="top:488px;"></div>
+  <div class="band-lbl" style="top:490px;left:16px;">BACKEND — Services</div>
+
+  <div class="band" style="top:718px;"></div>
+  <div class="band-lbl" style="top:720px;left:16px;">DOMAIN — Entities</div>
+
+  <div class="band" style="top:990px;"></div>
+  <div class="band-lbl" style="top:992px;left:16px;">PERSISTENCE — Repositories</div>
+
+  <!-- ===== FRONTEND ===== -->
+  <div class="cls c-teal" style="left:20px;top:46px;width:190px;" id="cp">
+    <div class="hd">CalculadoraPage</div>
+    <div class="bd">
+      <div>- empresa : String</div>
+      <div>- funcionarios : int</div>
+      <div>- modelo : String</div>
+    </div>
+    <div class="bd">
+      <div>+ calcular() : void</div>
+      <div>+ resetar() : void</div>
+    </div>
+  </div>
+
+  <div class="cls c-teal" style="left:240px;top:46px;width:190px;" id="ep">
+    <div class="hd">EvolucaoPage</div>
+    <div class="bd">
+      <div>- empresaId : Long</div>
+      <div>- periodo : DateRange</div>
+    </div>
+    <div class="bd">
+      <div>+ carregarHistorico()</div>
+      <div>+ exportarRelatorio()</div>
+    </div>
+  </div>
+
+  <div class="cls c-teal" style="left:460px;top:46px;width:196px;" id="bp">
+    <div class="hd">BenchmarkPage</div>
+    <div class="bd">
+      <div>- setor : String</div>
+      <div>- concorrentes : List</div>
+    </div>
+    <div class="bd">
+      <div>+ carregarBenchmark()</div>
+      <div>+ comparar() : void</div>
+    </div>
+  </div>
+
+  <div class="cls c-purple" style="left:240px;top:172px;width:190px;" id="ac">
+    <div class="hd"><span class="st">« hook / axios »</span>apiClient</div>
+    <div class="bd">
+      <div>+ get(url) : Promise</div>
+      <div>+ post(url,body) : Promise</div>
+    </div>
+  </div>
+
+  <!-- ===== CONTROLLERS ===== -->
+  <div class="cls c-blue" style="left:20px;top:275px;width:200px;" id="cc">
+    <div class="hd"><span class="st">«@RestController»</span>CalculadoraController</div>
+    <div class="bd">
+      <div>+ calcular(req) : ImpactoDTO</div>
+      <div>  POST /api/calc/calcular</div>
+      <div>+ historico(id) : List</div>
+    </div>
+  </div>
+
+  <div class="cls c-blue" style="left:244px;top:275px;width:196px;" id="rc">
+    <div class="hd"><span class="st">«@RestController»</span>RelatorioController</div>
+    <div class="bd">
+      <div>+ gerarPDF(id) : byte[]</div>
+      <div>  GET /api/rel/pdf/{id}</div>
+      <div>+ benchmark(s) : List</div>
+    </div>
+  </div>
+
+  <div class="cls c-blue" style="left:460px;top:275px;width:196px;" id="ec">
+    <div class="hd"><span class="st">«@RestController»</span>EmpresaController</div>
+    <div class="bd">
+      <div>+ criar(dto) : EmpresaDTO</div>
+      <div>  POST /api/empresa</div>
+      <div>+ buscar(id) : EmpresaDTO</div>
+    </div>
+  </div>
+
+  <!-- ===== SERVICES ===== -->
+  <div class="cls c-coral" style="left:20px;top:505px;width:200px;" id="cs">
+    <div class="hd"><span class="st">«@Service»</span>CalculadoraService</div>
+    <div class="bd">
+      <div>- ghgCalc : GHGCalculator</div>
+      <div>- repo : RegistroRepository</div>
+    </div>
+    <div class="bd">
+      <div>+ calcularImpacto(req)</div>
+      <div>+ salvarHistorico(r)</div>
+    </div>
+  </div>
+
+  <div class="cls c-coral" style="left:244px;top:505px;width:196px;" id="rs">
+    <div class="hd"><span class="st">«@Service»</span>RelatorioService</div>
+    <div class="bd">
+      <div>- empRepo : EmpresaRepository</div>
+      <div>- regRepo : RegistroRepository</div>
+    </div>
+    <div class="bd">
+      <div>+ gerarPDF(empresaId)</div>
+      <div>+ montarBenchmark(setor)</div>
+    </div>
+  </div>
+
+  <div class="cls c-coral" style="left:460px;top:505px;width:196px;" id="es">
+    <div class="hd"><span class="st">«@Service»</span>EmpresaService</div>
+    <div class="bd">
+      <div>- repo : EmpresaRepository</div>
+    </div>
+    <div class="bd">
+      <div>+ criar(dto) : Empresa</div>
+      <div>+ buscarPorId(id)</div>
+      <div>+ listarPorSetor(s)</div>
+    </div>
+  </div>
+
+  <div class="cls c-gray" style="left:244px;top:648px;width:196px;" id="gh">
+    <div class="hd"><span class="st">«@Component»</span>GHGCalculator</div>
+    <div class="bd">
+      <div><u>FATOR_FISICO : 0.0149</u></div>
+      <div><u>FATOR_DIGITAL : 0.0018</u></div>
+    </div>
+    <div class="bd">
+      <div>+ calcular(n:int) : double</div>
+    </div>
+  </div>
+
+  <!-- ===== ENTITIES ===== -->
+  <div class="cls c-amber" style="left:20px;top:736px;width:196px;" id="em">
+    <div class="hd"><span class="st">«@Entity»</span>Empresa</div>
+    <div class="bd">
+      <div>- id : Long  «PK»</div>
+      <div>- nome : String</div>
+      <div>- cnpj : String</div>
+      <div>- setor : String</div>
+      <div>- numFuncionarios : int</div>
+      <div>- modeloBeneficio : String</div>
+    </div>
+    <div class="bd"><div>+ getters / setters</div></div>
+  </div>
+
+  <div class="cls c-amber" style="left:240px;top:736px;width:200px;" id="ri">
+    <div class="hd"><span class="st">«@Entity»</span>RegistroImpacto</div>
+    <div class="bd">
+      <div>- id : Long  «PK»</div>
+      <div>- empresa : Empresa  «FK»</div>
+      <div>- co2Evitado : double</div>
+      <div>- arvoresEq : int</div>
+      <div>- kgPvcNaoProd : double</div>
+      <div>- dataCalculo : LocalDate</div>
+    </div>
+    <div class="bd"><div>+ getters / setters</div></div>
+  </div>
+
+  <div class="cls c-amber" style="left:460px;top:736px;width:192px;" id="us">
+    <div class="hd"><span class="st">«@Entity»</span>Usuario</div>
+    <div class="bd">
+      <div>- id : Long  «PK»</div>
+      <div>- email : String</div>
+      <div>- senha : String</div>
+      <div>- role : Role</div>
+      <div>- empresa : Empresa  «FK»</div>
+    </div>
+    <div class="bd"><div>+ getters / setters</div></div>
+  </div>
+
+  <!-- ===== REPOSITORIES ===== -->
+  <div class="cls c-pink" style="left:240px;top:1008px;width:196px;" id="jr">
+    <div class="hd"><span class="st">«interface»</span>JpaRepository&lt;T,ID&gt;</div>
+    <div class="bd">
+      <div>+ save(entity) : T</div>
+      <div>+ findById(id) : Optional</div>
+      <div>+ findAll() : List</div>
+      <div>+ delete(entity)</div>
+    </div>
+  </div>
+
+  <div class="cls c-pink" style="left:20px;top:1140px;width:196px;" id="er">
+    <div class="hd"><span class="st">«interface»</span>EmpresaRepository</div>
+    <div class="bd">
+      <div>+ findBySetor(s) : List</div>
+      <div>+ findByCnpj(c) : Optional</div>
+    </div>
+  </div>
+
+  <div class="cls c-pink" style="left:240px;top:1140px;width:196px;" id="rr">
+    <div class="hd"><span class="st">«interface»</span>RegistroRepository</div>
+    <div class="bd">
+      <div>+ findByEmpresaId(id)</div>
+      <div>  : List&lt;RegistroImpacto&gt;</div>
+    </div>
+  </div>
+
+  <div class="cls c-pink" style="left:456px;top:1140px;width:196px;" id="ur">
+    <div class="hd"><span class="st">«interface»</span>UsuarioRepository</div>
+    <div class="bd">
+      <div>+ findByEmail(e)</div>
+      <div>  : Optional&lt;Usuario&gt;</div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div style="position:absolute;bottom:6px;left:16px;right:8px;font-size:9.5px;color:var(--color-text-secondary);display:flex;gap:14px;flex-wrap:wrap;align-items:center;padding:4px 8px;border-top:1px solid var(--color-border-tertiary);z-index:5;">
+    <span>- - -▶ depend. HTTP</span>
+    <span>——▶ associação</span>
+    <span>——△ herança (extends)</span>
+    <span>◆——▶ composição</span>
+    <span>1 · 1..* · 0..*  cardinalidade</span>
+    <span><i>itálico</i> = nome da variável</span>
+  </div>
+
+  <svg class="conn" id="svgc"></svg>
+</div>
+
+<script>
+window.addEventListener('load',()=>{
+  const cv=document.getElementById('cv');
+  const svg=document.getElementById('svgc');
+  const CR=cv.getBoundingClientRect();
+  svg.setAttribute('viewBox',`0 0 ${cv.offsetWidth} ${cv.offsetHeight}`);
+
+  function g(id){
+    const r=document.getElementById(id).getBoundingClientRect();
+    const x=r.left-CR.left,y=r.top-CR.top;
+    return{x,y,w:r.width,h:r.height,
+      cx:x+r.width/2,cy:y+r.height/2,
+      top:y,bot:y+r.height,left:x,right:x+r.width};
+  }
+
+  const defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+
+  function mkM(id,d,fill,rx='11',ry='6',vb='0 0 12 12',mw='7',mh='7'){
+    const m=document.createElementNS('http://www.w3.org/2000/svg','marker');
+    m.setAttribute('id',id);m.setAttribute('viewBox',vb);
+    m.setAttribute('refX',rx);m.setAttribute('refY',ry);
+    m.setAttribute('markerWidth',mw);m.setAttribute('markerHeight',mh);
+    m.setAttribute('orient','auto-start-reverse');
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',d);p.setAttribute('stroke','#555');p.setAttribute('stroke-width','1.2');
+    p.setAttribute('fill',fill);m.appendChild(p);defs.appendChild(m);
+  }
+
+  // open arrow – association
+  mkM('marr','M1 2L10 6L1 10','none');
+  // hollow triangle – herança
+  mkM('mher','M1 1L11 6L1 11Z','var(--color-background-primary)');
+  // filled diamond – composição (placed at start)
+  mkM('mdia','M8 0L16 6L8 12L0 6Z','#555','1','6','0 0 16 12','10','10');
+
+  svg.appendChild(defs);
+
+  function ln(x1,y1,x2,y2,dash,mEnd,mStart,color){
+    const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',x1);l.setAttribute('y1',y1);
+    l.setAttribute('x2',x2);l.setAttribute('y2',y2);
+    l.setAttribute('stroke',color||'#666');l.setAttribute('stroke-width','1.3');
+    if(dash)l.setAttribute('stroke-dasharray','5 3');
+    if(mEnd)l.setAttribute('marker-end',mEnd);
+    if(mStart)l.setAttribute('marker-start',mStart);
+    svg.appendChild(l);
+  }
+
+  function pt(d,dash,mEnd,mStart,color){
+    const el=document.createElementNS('http://www.w3.org/2000/svg','path');
+    el.setAttribute('d',d);el.setAttribute('fill','none');
+    el.setAttribute('stroke',color||'#666');el.setAttribute('stroke-width','1.3');
+    if(dash)el.setAttribute('stroke-dasharray','5 3');
+    if(mEnd)el.setAttribute('marker-end',mEnd);
+    if(mStart)el.setAttribute('marker-start',mStart);
+    svg.appendChild(el);
+  }
+
+  function lb(x,y,txt,italic){
+    const d=document.createElement('div');
+    d.className='rel-lbl';
+    d.style.cssText=`position:absolute;left:${x}px;top:${y}px;font-size:9.5px;color:var(--color-text-secondary);background:var(--color-background-primary);padding:0 2px;white-space:nowrap;font-family:var(--font-mono);${italic?'font-style:italic':''}`;
+    d.textContent=txt;
+    cv.appendChild(d);
+  }
+
+  const CP=g('cp'),EP=g('ep'),BP=g('bp'),AC=g('ac');
+  const CC=g('cc'),RC=g('rc'),EC=g('ec');
+  const CS=g('cs'),RS=g('rs'),ES=g('es'),GH=g('gh');
+  const EM=g('em'),RI=g('ri'),US=g('us');
+  const JR=g('jr'),ER=g('er'),RR=g('rr'),UR=g('ur');
+
+  // ── Pages → apiClient (associação)
+  ln(CP.cx,CP.bot,AC.left+28,AC.top,false,'url(#marr)');
+  ln(EP.cx,EP.bot,AC.cx,AC.top,false,'url(#marr)');
+  ln(BP.cx,BP.bot,AC.right-28,AC.top,false,'url(#marr)');
+
+  // ── apiClient → Controllers (dependência HTTP, tracejado)
+  ln(AC.left+22,AC.bot,CC.cx,CC.top,true,'url(#marr)');
+  ln(AC.cx,AC.bot,RC.cx,RC.top,true,'url(#marr)');
+  ln(AC.right-22,AC.bot,EC.cx,EC.top,true,'url(#marr)');
+
+  // ── Controllers → Services (associação)
+  ln(CC.cx,CC.bot,CS.cx,CS.top,false,'url(#marr)');
+  ln(RC.cx,RC.bot,RS.cx,RS.top,false,'url(#marr)');
+  ln(EC.cx,EC.bot,ES.cx,ES.top,false,'url(#marr)');
+
+  // ── CalculadoraService.ghgCalc → GHGCalculator (associação 1:1)
+  pt(`M${CS.right} ${CS.cy+8} L${GH.left} ${GH.cy-8}`,false,'url(#marr)');
+  lb((CS.right+GH.left)/2-30,(CS.cy+GH.cy)/2-18,'ghgCalc',true);
+  lb((CS.right+GH.left)/2+16,(CS.cy+GH.cy)/2-18,'1');
+
+  // ── Services → Entities (associação)
+  ln(CS.cx,CS.bot,EM.cx,EM.top,false,'url(#marr)');
+  ln(RS.cx,RS.bot,RI.cx,RI.top,false,'url(#marr)');
+  ln(ES.cx,ES.bot,US.cx,US.top,false,'url(#marr)');
+
+  // ── Empresa ◆──1..* RegistroImpacto (composição)
+  //    variável: empresa  |  cardinalidade: 1 ——◆ 1..*
+  const ex1=EM.right, ey1=EM.cy+8;
+  const ex2=RI.left,  ey2=RI.cy+8;
+  ln(ex1,ey1,ex2,ey2,false,'url(#marr)','url(#mdia)');
+  lb(ex1+4,ey1-14,'1');
+  lb((ex1+ex2)/2-18,ey1-14,'empresa',true);
+  lb(ex2-28,ey2-14,'1..*');
+
+  // ── Empresa ◆──0..* Usuario (composição)
+  //    variável: empresa  |  cardinalidade: 1 ——◆ 0..*
+  const routeY=EM.top-20;
+  pt(`M${EM.right} ${EM.cy-14} L${EM.right+16} ${EM.cy-14} L${EM.right+16} ${routeY} L${US.left-16} ${routeY} L${US.left-16} ${US.cy-14} L${US.left} ${US.cy-14}`,
+    false,'url(#marr)','url(#mdia)');
+  lb(EM.right+20,routeY-14,'empresa',true);
+  lb(EM.right+4,EM.cy-28,'1');
+  lb(US.left-28,US.cy-28,'0..*');
+
+  // ── Entities → Repositories (associação de uso)
+  ln(EM.cx,EM.bot,ER.cx,ER.top,false,'url(#marr)');
+  ln(RI.cx,RI.bot,RR.cx,RR.top,false,'url(#marr)');
+  ln(US.cx,US.bot,UR.cx,UR.top,false,'url(#marr)');
+
+  // ── Repositories extends JpaRepository (herança – triângulo vazio)
+  pt(`M${ER.cx} ${ER.top} L${JR.left+32} ${JR.bot}`,false,null,'url(#mher)');
+  lb(ER.cx-8,(ER.top+JR.bot)/2,'extends');
+
+  ln(RR.cx,RR.top,JR.cx,JR.bot,false,null,'url(#mher)');
+  lb(RR.cx+4,(RR.top+JR.bot)/2,'extends');
+
+  pt(`M${UR.cx} ${UR.top} L${JR.right-32} ${JR.bot}`,false,null,'url(#mher)');
+  lb(UR.cx-16,(UR.top+JR.bot)/2,'extends');
+
+  // ── Services.repo → Repositories (associação injetada, tracejado)
+  // CalculadoraService.repo → RegistroRepository
+  const leftRail=CS.left-18;
+  pt(`M${CS.left} ${CS.cy+10} L${leftRail} ${CS.cy+10} L${leftRail} ${ER.cy} L${ER.left} ${ER.cy}`,
+    true,'url(#marr)');
+  lb(leftRail-34,CS.cy,'repo',true);
+  lb(ER.left-14,ER.cy-12,'1');
+
+  // RelatorioService.regRepo → RegistroRepository
+  ln(RS.cx,RS.bot,RR.cx,RR.top,true,'url(#marr)');
+  lb(RS.cx+4,(RS.bot+RR.top)/2,'regRepo  1',true);
+
+  // EmpresaService.repo → EmpresaRepository
+  const rightRail=ES.right+18;
+  pt(`M${ES.right} ${ES.cy+10} L${rightRail} ${ES.cy+10} L${rightRail} ${ER.cy-12} L${ER.right} ${ER.cy-12}`,
+    true,'url(#marr)');
+  lb(rightRail+2,ES.cy,'repo  1',true);
+});
+</script>

@@ -8,6 +8,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Request payload for emissions calculation.
+ */
 @Data
 public class CalculoRequest {
 

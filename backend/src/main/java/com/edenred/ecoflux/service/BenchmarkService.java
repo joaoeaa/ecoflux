@@ -7,6 +7,9 @@ import com.edenred.ecoflux.model.enums.Porte;
 import com.edenred.ecoflux.model.enums.Setor;
 import org.springframework.stereotype.Service;
 
+/**
+ * Provides benchmark calculations based on setor and porte.
+ */
 @Service
 public class BenchmarkService {
 
@@ -16,6 +19,13 @@ public class BenchmarkService {
         this.dataLoader = dataLoader;
     }
 
+    /**
+     * Builds benchmark data for the requested setor and porte.
+     *
+     * @param setor setor da empresa
+     * @param porte porte da empresa
+     * @return benchmark data
+     */
     public BenchmarkData getBenchmark(Setor setor, Porte porte) {
         PorteBenchmark pb = getPorteBenchmark(setor, porte);
 
@@ -28,10 +38,23 @@ public class BenchmarkService {
         return data;
     }
 
+    /**
+     * Returns the average emissions for a setor (porte grande).
+     *
+     * @param setor setor da empresa
+     * @return average emissions in tCO2e/ano
+     */
     public double getMediaSetor(Setor setor) {
         return getPorteBenchmark(setor, Porte.GRANDE).getMediaEmissoes_tCO2e_ano();
     }
 
+    /**
+     * Calculates the percentile position given emissions and setor.
+     *
+     * @param tCO2e total emissions in tCO2e
+     * @param setor setor da empresa
+     * @return percentile bucket (10, 25, 50, 75, 90)
+     */
     public int calcularPercentil(double tCO2e, Setor setor) {
         PorteBenchmark pb = getPorteBenchmark(setor, Porte.GRANDE);
         double p25 = pb.getPercentis().get("p25");

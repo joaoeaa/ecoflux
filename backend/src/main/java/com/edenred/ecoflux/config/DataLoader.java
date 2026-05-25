@@ -16,6 +16,9 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Loads JSON datasets from the classpath into memory at startup.
+ */
 @Component
 @Getter
 public class DataLoader {
@@ -24,6 +27,11 @@ public class DataLoader {
     private List<Empresa> empresas;
     private BenchmarkJson benchmark;
 
+    /**
+     * Reads premissas, empresas and benchmark files into memory.
+     *
+     * @throws IOException when classpath resources cannot be read
+     */
     @PostConstruct
     public void load() throws IOException {
         ObjectMapper mapper = new ObjectMapper();

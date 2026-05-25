@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+/**
+ * Response payload with emissions and equivalences results.
+ */
 @Data
 @Builder
 public class CalculoResponse {

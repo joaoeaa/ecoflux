@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+/**
+ * Service that performs emission calculations and equivalences.
+ */
 @Service
 public class CalculoService {
 
@@ -21,6 +24,12 @@ public class CalculoService {
         this.benchmarkService = benchmarkService;
     }
 
+    /**
+     * Calculates emissions and benchmark position for a request payload.
+     *
+     * @param req request data with company and benefit details
+     * @return calculated response with emissions and equivalences
+     */
     public CalculoResponse calcular(CalculoRequest req) {
         Premissas.ParametrosCalculo p = dataLoader.getPremissas().getParametros();
         Premissas.EquivalenciasConfig eq = dataLoader.getPremissas().getEquivalencias();

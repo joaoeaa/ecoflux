@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.util.Map;
 
+/**
+ * Benchmark data returned by the API.
+ */
 @Data
 public class BenchmarkData {
     private String setor;

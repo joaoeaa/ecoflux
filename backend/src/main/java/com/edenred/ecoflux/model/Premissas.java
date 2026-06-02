@@ -5,6 +5,9 @@ import lombok.Data;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Premissas and parameters used in emissions calculations.
+ */
 @Data
 public class Premissas {
     private String versao;
@@ -14,6 +17,9 @@ public class Premissas {
     private EquivalenciasConfig equivalencias;
     private List<Fabrica> fabricas;
 
+    /**
+     * Parameters used to compute emission factors.
+     */
     @Data
     public static class ParametrosCalculo {
         private double fatorEmissaoRede_kgCO2e_kWh;
@@ -30,12 +36,18 @@ public class Premissas {
         private double delta_tCO2e_funcionario_ano;
     }
 
+    /**
+     * Configuration for equivalence conversions.
+     */
     @Data
     public static class EquivalenciasConfig {
         private double absorcaoArvore_kgCO2e_ano;
         private double emissaoCarroFlex_kgCO2e_ano;
     }
 
+    /**
+     * Factory reference used in the dataset.
+     */
     @Data
     public static class Fabrica {
         private int id;

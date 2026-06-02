@@ -9,6 +9,9 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Empresa domain model loaded from the dataset.
+ */
 @Data
 public class Empresa {
     private String id;

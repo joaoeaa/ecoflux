@@ -1,12 +1,12 @@
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
   ReferenceLine,
+  Area,
+  AreaChart,
 } from 'recharts'
 import type { HistoricoMes, Periodo } from '../../types'
 import { formatMes } from '../../utils/formatters'
@@ -26,35 +26,43 @@ export function EvolucaoChart({ dados, periodo, meta }: EvolucaoChartProps) {
   const data = slice.map((d) => ({
     mes: formatMes(d.mes),
     emissoes: d.emissoesEvitadas_tCO2e,
-    funcionarios: d.funcionariosMigrados,
   }))
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f0fdf4" />
-        <XAxis dataKey="mes" tick={{ fontSize: 12, fill: '#6b7280' }} />
+      <AreaChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
+        <defs>
+          <linearGradient id="colorEmissoes" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#FF1654" stopOpacity={0.15} />
+            <stop offset="95%" stopColor="#FF1654" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid strokeDasharray="3 3" stroke="#f5f5f5" vertical={false} />
+        <XAxis dataKey="mes" tick={{ fontSize: 11, fill: '#9ca3af' }} axisLine={false} tickLine={false} />
         <YAxis
-          tick={{ fontSize: 12, fill: '#6b7280' }}
+          tick={{ fontSize: 11, fill: '#9ca3af' }}
           tickFormatter={(v) => `${v} t`}
-          width={55}
+          width={50}
+          axisLine={false}
+          tickLine={false}
         />
         <Tooltip
           formatter={(value) => [`${Number(value).toFixed(2)} t CO₂e`, 'Emissões evitadas']}
-          contentStyle={{ borderRadius: '8px', border: '1px solid #d1fae5', fontSize: 13 }}
+          contentStyle={{ borderRadius: '12px', border: '1px solid #f0f0f0', fontSize: 12 }}
         />
         {meta && (
-          <ReferenceLine y={meta} stroke="#f59e0b" strokeDasharray="4 4" label={{ value: 'Meta', fill: '#f59e0b', fontSize: 11 }} />
+          <ReferenceLine y={meta} stroke="#FF1654" strokeDasharray="4 4" label={{ value: 'Meta', fill: '#FF1654', fontSize: 11 }} />
         )}
-        <Line
+        <Area
           type="monotone"
           dataKey="emissoes"
-          stroke="#16a34a"
+          stroke="#FF1654"
           strokeWidth={2.5}
-          dot={{ r: 4, fill: '#16a34a' }}
-          activeDot={{ r: 6 }}
+          fill="url(#colorEmissoes)"
+          dot={{ r: 4, fill: '#FF1654', strokeWidth: 0 }}
+          activeDot={{ r: 6, fill: '#FF1654' }}
         />
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
   )
 }

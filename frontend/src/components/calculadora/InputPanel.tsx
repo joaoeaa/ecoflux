@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import type { CalculoRequest, ModeloBeneficio, TipoBeneficio, Setor } from '../../types'
+import type { CalculoRequest, ModeloBeneficio, Setor } from '../../types'
 import { Button } from '../ui/Button'
+import { ChevronDown } from 'lucide-react'
 
 interface InputPanelProps {
   onSubmit: (req: CalculoRequest) => void
@@ -14,12 +15,6 @@ const modelos: { value: ModeloBeneficio; label: string }[] = [
   { value: 'MISTO', label: 'Misto' },
 ]
 
-const beneficios: { value: TipoBeneficio; label: string }[] = [
-  { value: 'VA', label: 'Vale Alimentação' },
-  { value: 'VR', label: 'Vale Refeição' },
-  { value: 'MOBILIDADE', label: 'Mobilidade' },
-]
-
 const setores: { value: Setor; label: string }[] = [
   { value: 'varejo', label: 'Varejo' },
   { value: 'servicos', label: 'Serviços' },
@@ -28,109 +23,110 @@ const setores: { value: Setor; label: string }[] = [
   { value: 'educacao', label: 'Educação' },
 ]
 
+const inputClass =
+  'w-full border border-gray-200 rounded-2xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:border-transparent transition-all placeholder-gray-400'
+const inputFocusStyle = { '--tw-ring-color': '#FF1654' } as React.CSSProperties
+
+const selectClass =
+  'w-full border border-gray-200 rounded-2xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:border-transparent transition-all appearance-none cursor-pointer'
+
 export function InputPanel({ onSubmit, loading }: InputPanelProps) {
   const [nome, setNome] = useState('')
-  const [funcionarios, setFuncionarios] = useState(500)
+  const [funcionarios, setFuncionarios] = useState(1200)
   const [modelo, setModelo] = useState<ModeloBeneficio>('FISICO_PVC')
-  const [tipos, setTipos] = useState<TipoBeneficio[]>(['VA', 'VR'])
-  const [migracao, setMigracao] = useState(100)
   const [setor, setSetor] = useState<Setor>('varejo')
-
-  function toggleTipo(t: TipoBeneficio) {
-    setTipos((prev) =>
-      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]
-    )
-  }
+  const [migracao, setMigracao] = useState(100)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!nome || tipos.length === 0) return
-    onSubmit({ nomeEmpresa: nome, funcionarios, modeloAtual: modelo, tiposBeneficio: tipos, percentualMigracao: migracao, setor })
+    if (!nome) return
+    onSubmit({
+      nomeEmpresa: nome,
+      funcionarios,
+      modeloAtual: modelo,
+      tiposBeneficio: ['VA', 'VR'],
+      percentualMigracao: migracao,
+      setor,
+    })
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Nome da empresa</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Razão social / Nome da empresa
+        </label>
         <input
           type="text"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
-          placeholder="Ex: Empresa XYZ S.A."
+          placeholder="Ex: Grupo Magazine Ltda."
           required
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+          className={inputClass}
+          style={inputFocusStyle}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Funcionários: <span className="text-green-700 font-bold">{funcionarios.toLocaleString('pt-BR')}</span>
+        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Total de funcionários beneficiados
         </label>
         <input
-          type="range"
-          min={10}
-          max={50000}
-          step={10}
+          type="number"
           value={funcionarios}
           onChange={(e) => setFuncionarios(Number(e.target.value))}
-          className="w-full accent-green-600"
+          placeholder="EX: 1.200"
+          min={1}
+          className={inputClass}
+          style={inputFocusStyle}
         />
-        <div className="flex justify-between text-xs text-gray-400 mt-1">
-          <span>10</span><span>50.000</span>
-        </div>
+        <p className="text-xs text-gray-400 mt-1">
+          Utilize o total de colaboradores CLT que recebem o benefício
+        </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Modelo atual</label>
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Modelo de benefício atual
+        </label>
+        <div className="relative">
           <select
             value={modelo}
             onChange={(e) => setModelo(e.target.value as ModeloBeneficio)}
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+            className={selectClass}
+            style={inputFocusStyle}
           >
             {modelos.map((m) => (
               <option key={m.value} value={m.value}>{m.label}</option>
             ))}
           </select>
+          <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
         </div>
+      </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Setor</label>
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Setor de atuação
+        </label>
+        <div className="relative">
           <select
             value={setor}
             onChange={(e) => setSetor(e.target.value as Setor)}
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+            className={selectClass}
+            style={inputFocusStyle}
           >
             {setores.map((s) => (
               <option key={s.value} value={s.value}>{s.label}</option>
             ))}
           </select>
+          <ChevronDown size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Tipos de benefício</label>
-        <div className="flex gap-2 flex-wrap">
-          {beneficios.map((b) => (
-            <button
-              key={b.value}
-              type="button"
-              onClick={() => toggleTipo(b.value)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors cursor-pointer ${
-                tipos.includes(b.value)
-                  ? 'bg-green-600 text-white border-green-600'
-                  : 'bg-white text-gray-600 border-gray-200 hover:border-green-400'
-              }`}
-            >
-              {b.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          % de migração: <span className="text-green-700 font-bold">{migracao}%</span>
+        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Percentual estimado de migração para digital:{' '}
+          <span className="font-black text-gray-900">{migracao}%</span>
         </label>
         <input
           type="range"
@@ -138,12 +134,15 @@ export function InputPanel({ onSubmit, loading }: InputPanelProps) {
           max={100}
           value={migracao}
           onChange={(e) => setMigracao(Number(e.target.value))}
-          className="w-full accent-green-600"
+          className="w-full"
         />
+        <p className="text-xs text-gray-400 mt-1">
+          100% = todos migram para cartão digital Edenred
+        </p>
       </div>
 
-      <Button type="submit" loading={loading} className="w-full py-3">
-        Calcular Emissões Evitadas
+      <Button type="submit" loading={loading} className="w-full py-4 text-base font-black uppercase tracking-wider">
+        Calcular Impacto Agora
       </Button>
     </form>
   )

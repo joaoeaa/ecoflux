@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&display=swap');
 @import "tailwindcss";
 
 @media print {
-  aside, header { display: none !important; }
+  nav { display: none !important; }
   main { display: block !important; }
   body { background: white; }
 }
@@ -13,12 +14,31 @@
 body {
   margin: 0;
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
-  background: #f0fdf4;
-  color: #1a2e1a;
+  background: #ffffff;
+  color: #111111;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
-  display: flex;
+}
+
+.heading-display {
+  font-family: 'Barlow Condensed', system-ui, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.gradient-red {
+  background: linear-gradient(135deg, #FF1654 0%, #FF6B9D 100%);
+}
+
+.gradient-red-dark {
+  background: linear-gradient(135deg, #E8003D 0%, #FF1654 100%);
+}
+
+input[type="range"] {
+  accent-color: #FF1654;
 }

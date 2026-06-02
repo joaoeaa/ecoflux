@@ -8,18 +8,22 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
 }
 
-const variants: Record<Variant, string> = {
-  primary: 'bg-green-600 hover:bg-green-700 text-white shadow-sm',
-  secondary: 'bg-white hover:bg-green-50 text-green-700 border border-green-300',
-  ghost: 'hover:bg-green-50 text-green-700',
-}
+export function Button({ variant = 'primary', loading, children, className = '', disabled, style, ...props }: ButtonProps) {
+  const base = 'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold text-sm transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 
-export function Button({ variant = 'primary', loading, children, className = '', disabled, ...props }: ButtonProps) {
+  const variantStyle: React.CSSProperties =
+    variant === 'primary'
+      ? { background: 'linear-gradient(135deg, #FF1654 0%, #FF6B9D 100%)', color: '#fff' }
+      : variant === 'secondary'
+      ? { background: '#fff', color: '#FF1654', border: '1.5px solid #FF1654' }
+      : { background: 'transparent', color: '#FF1654' }
+
   return (
     <button
       {...props}
       disabled={disabled || loading}
-      className={`inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${variants[variant]} ${className}`}
+      className={`${base} ${className}`}
+      style={{ ...variantStyle, ...style }}
     >
       {loading && (
         <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">

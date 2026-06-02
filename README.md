@@ -1,6 +1,6 @@
 # Ecoflux
 
-API REST para cálculo e rastreamento da redução de emissões de carbono (CO2 equivalente) resultante da digitalização de programas de benefícios corporativos — migrando de cartões físicos (PVC, papel) para soluções digitais.
+Plataforma fullstack para cálculo e rastreamento da redução de emissões de carbono (CO2 equivalente) resultante da digitalização de programas de benefícios corporativos — migrando de cartões físicos (PVC, papel) para soluções digitais.
 
 Desenvolvido por **Edenred**, o sistema calcula o impacto ambiental da migração, compara com benchmarks do setor e fornece equivalências ambientais compreensíveis (árvores plantadas, carros retirados de circulação, kg de PVC economizados).
 
@@ -28,13 +28,17 @@ O Ecoflux permite que uma empresa informe seu perfil (número de funcionários, 
 - **Emissões evitadas** em tCO2e/ano e kgCO2e/ano
 - **Equivalências ambientais** (árvores, carros, kg de PVC)
 - **Posicionamento no benchmark** do setor (percentil)
+- **Histórico mensal** de migração e emissões evitadas
+- **Relatório exportável** em PDF com todos os dados
 - **Metodologia** e premissas utilizadas no cálculo
 
-A aplicação é **100% in-memory** — nenhum banco de dados externo é necessário. Todos os dados de referência (premissas, benchmarks, empresas de exemplo) são carregados de arquivos JSON na inicialização.
+O backend é **100% in-memory** — nenhum banco de dados externo é necessário. Todos os dados de referência (premissas, benchmarks, empresas de exemplo) são carregados de arquivos JSON na inicialização.
 
 ---
 
 ## Tecnologias
+
+### Backend
 
 | Tecnologia | Versão | Função |
 |---|---|---|
@@ -42,127 +46,132 @@ A aplicação é **100% in-memory** — nenhum banco de dados externo é necess�
 | Spring Boot | 3.5.x | Framework da aplicação |
 | Spring Web (MVC) | (incluso) | Camada REST/HTTP |
 | Spring Validation | (incluso) | Validação de entrada via anotações |
-| Lombok | (latest) | Redução de boilerplate (getters, setters, etc.) |
+| Lombok | (latest) | Redução de boilerplate |
 | Jackson | (incluso) | Serialização/desserialização JSON |
 | Jackson JSR310 | (incluso) | Suporte a `LocalDate` / `LocalDateTime` |
 | Maven | 3.9.x (wrapper) | Gerenciamento de dependências e build |
 | JUnit 5 | (incluso) | Testes unitários e de integração |
 
+### Frontend
+
+| Tecnologia | Versão | Função |
+|---|---|---|
+| React | 19 | Framework de UI |
+| TypeScript | 6 | Tipagem estática |
+| Vite | 8 | Bundler e servidor de desenvolvimento |
+| Tailwind CSS | 4 | Estilização utilitária |
+| Recharts | 3 | Gráficos de linha e barras |
+| jsPDF | 4 | Exportação de relatórios em PDF |
+| Lucide React | (latest) | Ícones |
+
 ---
 
 ## Pré-requisitos
 
-Antes de rodar o projeto, você precisa ter instalado na sua máquina:
+### Backend
 
-### 1. Java Development Kit (JDK) 21
+**Java Development Kit (JDK) 21**
 
-O projeto usa **Java 21**. Versões anteriores não funcionarão.
-
-**Verificar versão instalada:**
 ```bash
 java -version
+# deve exibir openjdk 21 ou java version "21"
 ```
-A saída deve exibir `openjdk 21` ou `java version "21"`.
 
-**Instalar o JDK 21 (caso não tenha):**
-- **Windows/Mac/Linux:** Baixe em [Adoptium (Eclipse Temurin)](https://adoptium.net/temurin/releases/?version=21) — opção recomendada e gratuita.
-- Ou via gerenciador de pacotes:
-  ```bash
-  # macOS com Homebrew
-  brew install openjdk@21
+Caso não tenha, baixe em [Adoptium (Eclipse Temurin)](https://adoptium.net/temurin/releases/?version=21).
 
-  # Ubuntu/Debian
-  sudo apt install openjdk-21-jdk
+O Maven Wrapper já está incluso (`mvnw` / `mvnw.cmd`), então **não é necessário instalar o Maven globalmente**.
 
-  # Windows via Scoop
-  scoop bucket add java && scoop install temurin21-jdk
-  ```
+### Frontend
 
-### 2. Maven (opcional — já incluso via Wrapper)
+**Node.js 18+** e **npm**
 
-O projeto já inclui o **Maven Wrapper** (`mvnw` / `mvnw.cmd`), então **não é necessário instalar o Maven globalmente**. O wrapper baixa a versão correta automaticamente na primeira execução.
-
-Se preferir usar o Maven instalado na máquina, garanta **Maven 3.8+**:
 ```bash
-mvn -version
+node -v
+npm -v
 ```
-
-### 3. Git
-
-Para clonar o repositório:
-```bash
-git --version
-```
-
-### 4. (Opcional) IDE
-
-Recomendadas para desenvolvimento:
-- **IntelliJ IDEA** (Community ou Ultimate) — melhor suporte a Spring Boot
-- **VS Code** com extensão [Extension Pack for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
-- **Eclipse** com Spring Tools Suite
 
 ---
 
 ## Como rodar o projeto
 
-### 1. Clonar o repositório
+### Backend
 
-```bash
-git clone https://github.com/<org>/ecoflux.git
-cd ecoflux
-```
-
-### 2. Entrar no diretório do backend
-
+**1. Entrar no diretório do backend:**
 ```bash
 cd backend
 ```
 
-### 3. Executar a aplicação
+**2. Executar a aplicação:**
 
-**Linux / macOS:**
+Linux / macOS:
 ```bash
 ./mvnw spring-boot:run
 ```
 
-**Windows (PowerShell ou CMD):**
+Windows (PowerShell ou CMD):
 ```bat
 mvnw.cmd spring-boot:run
 ```
 
-Na primeira execução, o Maven Wrapper baixará todas as dependências automaticamente (pode demorar alguns minutos dependendo da conexão).
+A API estará disponível em **http://localhost:8080**.
 
-### 4. Verificar que subiu corretamente
+**3. Verificar que subiu corretamente:**
 
-Quando a aplicação estiver pronta, você verá no terminal uma linha parecida com:
-
+Quando pronto, o terminal exibirá:
 ```
 Started EcofluxApplication in 2.341 seconds (process running for 2.6)
 ```
 
-A API estará disponível em: **http://localhost:8080**
-
-### 5. Testar um endpoint rápido
-
+**4. Testar um endpoint rápido:**
 ```bash
 curl http://localhost:8080/api/premissas
 ```
 
-Deve retornar um JSON com as premissas metodológicas.
+---
+
+### Frontend
+
+**1. Entrar no diretório do frontend:**
+```bash
+cd frontend
+```
+
+**2. Instalar as dependências:**
+```bash
+npm install
+```
+
+**3. Iniciar o servidor de desenvolvimento:**
+```bash
+npm run dev
+```
+
+O frontend estará disponível em **http://localhost:5173**.
+
+> O backend deve estar rodando antes de usar o frontend, pois ele consome a API em `http://localhost:8080`.
 
 ---
 
-### Executar via JAR (build manual)
+### Build de produção (frontend)
 
-Se preferir compilar e executar o JAR diretamente:
+```bash
+cd frontend
+npm run build
+```
 
-**Linux / macOS:**
+Os arquivos estáticos serão gerados em `frontend/dist/`.
+
+---
+
+### Executar via JAR (backend)
+
+Linux / macOS:
 ```bash
 ./mvnw clean package -DskipTests
 java -jar target/ecoflux-0.0.1-SNAPSHOT.jar
 ```
 
-**Windows:**
+Windows:
 ```bat
 mvnw.cmd clean package -DskipTests
 java -jar target\ecoflux-0.0.1-SNAPSHOT.jar
@@ -170,14 +179,14 @@ java -jar target\ecoflux-0.0.1-SNAPSHOT.jar
 
 ---
 
-### Executar os testes
+### Executar os testes (backend)
 
-**Linux / macOS:**
+Linux / macOS:
 ```bash
 ./mvnw test
 ```
 
-**Windows:**
+Windows:
 ```bat
 mvnw.cmd test
 ```
@@ -186,16 +195,15 @@ mvnw.cmd test
 
 ## Configuração
 
-Todas as configurações ficam em:
-```
-backend/src/main/resources/application.properties
-```
+### Backend
+
+Arquivo de configuração: `backend/src/main/resources/application.properties`
 
 | Propriedade | Valor padrão | Descrição |
 |---|---|---|
 | `server.port` | `8080` | Porta em que a API sobe |
 | `spring.application.name` | `ecoflux` | Nome da aplicação no Spring |
-| `spring.jackson.serialization.write-dates-as-timestamps` | `false` | Datas em formato ISO 8601 (ex: `2026-01-15`) |
+| `spring.jackson.serialization.write-dates-as-timestamps` | `false` | Datas em formato ISO 8601 |
 | `server.servlet.encoding.charset` | `UTF-8` | Encoding padrão das respostas |
 
 ### CORS
@@ -207,8 +215,6 @@ http://localhost:5173
 ```
 
 Para alterar a origem permitida, edite `backend/src/main/java/com/edenred/ecoflux/config/CorsConfig.java`.
-
-### Variáveis de ambiente
 
 O projeto **não usa variáveis de ambiente**. Toda a configuração está em `application.properties`.
 
@@ -333,11 +339,68 @@ ecoflux/
 ├── README.md                          # Este arquivo
 ├── ecoflux_uml.html                   # Diagrama UML arquitetural (abra no browser)
 │
-├── frontend/
-│   └── .gitkeep                       # Placeholder — frontend ainda não implementado
+├── frontend/                          # Aplicação React + TypeScript + Vite
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   └── src/
+│       ├── App.tsx                    # Roteamento entre abas e estado global
+│       ├── main.tsx                   # Ponto de entrada React
+│       ├── index.css                  # Estilos globais + tokens Tailwind
+│       │
+│       ├── api/
+│       │   ├── ecofluxApi.ts          # Chamadas HTTP para o backend
+│       │   └── mockData.ts            # Dados mock para modo apresentação
+│       │
+│       ├── hooks/
+│       │   ├── useCalculo.ts          # Hook para POST /api/calcular
+│       │   ├── useBenchmark.ts        # Hook para GET /api/benchmark
+│       │   └── useEmpresa.ts          # Hook para GET /api/empresas
+│       │
+│       ├── pages/
+│       │   ├── Calculadora.tsx        # Aba de cálculo de emissões evitadas
+│       │   ├── Evolucao.tsx           # Aba de histórico mensal com gráfico
+│       │   ├── Benchmark.tsx          # Aba de comparativo setorial
+│       │   ├── Relatorio.tsx          # Aba de relatório exportável em PDF
+│       │   └── Transparencia.tsx      # Aba de metodologia e rastreabilidade
+│       │
+│       ├── components/
+│       │   ├── layout/
+│       │   │   ├── TopNav.tsx         # Navegação entre abas + toggle de modo
+│       │   │   ├── Header.tsx         # Cabeçalho da aplicação
+│       │   │   └── Sidebar.tsx        # Barra lateral
+│       │   ├── ui/
+│       │   │   ├── Button.tsx         # Componente de botão base
+│       │   │   ├── Card.tsx           # Container de conteúdo
+│       │   │   └── Badge.tsx          # Etiqueta de status/categoria
+│       │   ├── calculadora/
+│       │   │   ├── InputPanel.tsx     # Formulário de entrada de dados
+│       │   │   ├── ResultCard.tsx     # Exibição dos resultados do cálculo
+│       │   │   ├── EquivalenciasGrid.tsx  # Grid de equivalências ambientais
+│       │   │   └── MetodologiaBadge.tsx   # Indicador de metodologia GHG
+│       │   ├── evolucao/
+│       │   │   ├── EvolucaoChart.tsx  # Gráfico de linha mensal (Recharts)
+│       │   │   ├── KpiStrip.tsx       # Faixa de KPIs do período
+│       │   │   └── PeriodoFilter.tsx  # Filtro de período (3/6/12 meses)
+│       │   ├── benchmark/
+│       │   │   ├── BenchmarkChart.tsx # Gráfico de barras comparativo
+│       │   │   ├── PercentilBadge.tsx # Exibição do percentil da empresa
+│       │   │   └── SetorSelector.tsx  # Seletor de setor/porte
+│       │   ├── relatorio/
+│       │   │   ├── RelatorioPreview.tsx   # Preview do relatório antes do export
+│       │   │   └── ExportButton.tsx       # Botão de download em PDF (jsPDF)
+│       │   └── transparencia/
+│       │       ├── FabricasPanel.tsx  # Localização das fábricas consideradas
+│       │       ├── FontesTable.tsx    # Tabela de fontes de dados (MCTI, IEA, DEFRA)
+│       │       └── FronteirasPanel.tsx    # Fronteiras do sistema (Scope 3)
+│       │
+│       ├── types/
+│       │   └── index.ts               # Interfaces e tipos TypeScript
+│       └── utils/
+│           └── formatters.ts          # Formatação de números, datas e unidades
 │
 └── backend/
-    ├── pom.xml                        # Configuração Maven (dependências, Java 21, plugins)
+    ├── pom.xml                        # Configuração Maven (dependências, Java 21)
     ├── mvnw                           # Maven Wrapper — Linux/macOS
     ├── mvnw.cmd                       # Maven Wrapper — Windows
     ├── .mvn/wrapper/
@@ -442,18 +505,32 @@ O `CalculoService` segue estes passos para calcular emissões evitadas:
 ## Arquitetura
 
 ```
-Requisição HTTP
-      ↓
-Controllers (4 classes)          ← Validação de entrada, roteamento
-      ↓
-Services (3 classes)             ← Regras de negócio, cálculos, percentis
-      ↓
-DataLoader (singleton)           ← Dados em memória carregados no startup
-      ↓
-Arquivos JSON (3 arquivos)       ← premissas.json, benchmark.json, empresas.json
+                    ┌─────────────────────────────┐
+                    │        Frontend (React)       │
+                    │  http://localhost:5173        │
+                    │                               │
+                    │  Calculadora │ Evolução        │
+                    │  Benchmark   │ Relatório       │
+                    │  Transparência                 │
+                    └──────────────┬────────────────┘
+                                   │ HTTP (JSON)
+                                   ▼
+                    ┌─────────────────────────────┐
+                    │        Backend (Spring Boot)  │
+                    │  http://localhost:8080        │
+                    │                               │
+                    │  Controllers (4 classes)      │
+                    │        ↓                      │
+                    │  Services (3 classes)         │
+                    │        ↓                      │
+                    │  DataLoader (in-memory)       │
+                    │        ↓                      │
+                    │  JSONs (premissas, benchmark, │
+                    │         empresas)             │
+                    └─────────────────────────────┘
 ```
 
-A aplicação **não tem banco de dados, não tem cache externo e não tem mensageria**. É um serviço REST stateless com dados estáticos em memória — simples de rodar, sem dependências externas além do JDK.
+O backend é um serviço REST stateless sem banco de dados, cache externo ou mensageria — simples de rodar, sem dependências externas além do JDK.
 
 ---
 
@@ -463,14 +540,9 @@ A aplicação **não tem banco de dados, não tem cache externo e não tem mensa
 Você está usando uma versão do Java anterior à 21. Instale o JDK 21 e certifique-se de que `JAVA_HOME` aponta para ele.
 
 ```bash
-# Verificar versão
 java -version
-
-# Verificar JAVA_HOME (Linux/macOS)
-echo $JAVA_HOME
-
-# Windows PowerShell
-echo $env:JAVA_HOME
+echo $JAVA_HOME          # Linux/macOS
+echo $env:JAVA_HOME      # Windows PowerShell
 ```
 
 ### Porta 8080 já em uso
@@ -485,6 +557,15 @@ Ou passe via linha de comando:
 ./mvnw spring-boot:run -Dspring-boot.run.arguments=--server.port=9090
 ```
 
+### Porta 5173 já em uso
+Altere a porta no `frontend/vite.config.ts`:
+
+```ts
+export default defineConfig({
+  server: { port: 5174 }
+})
+```
+
 ### Erro de encoding em caracteres especiais
 Garanta que o terminal usa UTF-8. No Windows, execute `chcp 65001` antes de rodar a aplicação.
 
@@ -492,4 +573,10 @@ Garanta que o terminal usa UTF-8. No Windows, execute `chcp 65001` antes de roda
 ```bash
 chmod +x mvnw
 ./mvnw spring-boot:run
+```
+
+### `npm install` falha
+Verifique a versão do Node.js:
+```bash
+node -v   # deve ser 18 ou superior
 ```

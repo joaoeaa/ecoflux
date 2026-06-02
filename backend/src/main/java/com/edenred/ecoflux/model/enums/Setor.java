@@ -1,7 +1,7 @@
 package com.edenred.ecoflux.model.enums;
 
 /**
- * Setores economicos disponiveis na base.
+ * Setores econômicos disponíveis na base.
  */
 public enum Setor {
     VAREJO,
